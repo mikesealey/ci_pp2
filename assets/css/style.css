@@ -1,3 +1,54 @@
-h1 {
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    height: 100vh;
+    border: 1px solid red;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+#title {
+    text-align: center;
+}
+
+#game {
+    border: 2px solid red;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+#board {
+    width: 500px;
+    height: 500px;
+    border: 2px solid blue;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+#console {
+    width: 500px;
+    height: 500px;
+    border: 2px solid lime;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    height: 100%;
+}
+
+.row div {
     border: 2px solid rebeccapurple;
+    width: 33%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
 }
