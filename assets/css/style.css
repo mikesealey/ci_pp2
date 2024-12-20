@@ -52,3 +52,15 @@ body {
     flex-direction: column;
     justify-content: space-around;
 }
+
+#console {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    
+}
+
+#console * {
+    border: 1px solid rebeccapurple;
+    padding: 5px 2px;
+}
