@@ -3,7 +3,7 @@
  */
 
 const $ = require("jquery");
-const selectTile = require("../js/script");
+const { selectTile, computerSelectTile } = require("../js/script");
 
 global.$ = $;
 
@@ -61,3 +61,9 @@ describe("Applying Markers to tiles", () => {
         expect(playerTest.score).toBe(1);
     });
 });
+
+describe("Computer-player makes a selection", ()=> {
+    test('Computer selects any valid tile', () => {
+        expect(Array.isArray(computerSelectTile())).toBe(true)
+      });
+})
