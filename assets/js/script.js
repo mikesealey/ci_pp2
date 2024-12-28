@@ -11,10 +11,14 @@ let computer = {
 }
 
 function selectTile(tile, player) {
-    tile.innerText = player.symbol
-    $("#console").append(`<div>${player.name} selected ${tile.id}</div>`)
-    player.score += 1
-
+    if (tile.innerText === "?"){
+        tile.innerText = player.symbol
+        $("#console").append(`<div>${player.name} selected ${tile.id}</div>`)
+        player.score += 1
+    } else {
+        $("#console").append(`<div>Invalid tile selection - please try again.</div>`)
+    }
+    
 }
 
 function computerSelectTile(){
@@ -26,9 +30,6 @@ function computerSelectTile(){
 
     let index = Math.floor(Math.random() * possibleTiles.length)
     possibleTiles.length ? selectTile(possibleTiles[index], computer) : ""
-    
-    
-
 }
 
 $(document).ready(function () {
