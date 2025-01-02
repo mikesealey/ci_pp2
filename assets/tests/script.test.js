@@ -3,7 +3,7 @@
  */
 
 const $ = require("jquery");
-const { selectTile, computerSelectTile } = require("../js/script");
+const { selectTile, computerSelectTile, checkWinStatus } = require("../js/script");
 
 global.$ = $;
 
@@ -67,3 +67,112 @@ describe("Computer-player makes a selection", ()=> {
         expect(Array.isArray(computerSelectTile())).toBe(true)
       });
 })
+
+describe("Check win-status", ()=> {
+    let playerTest;
+
+    beforeEach(() => {
+        playerTest = {
+            name: "Mike",
+            symbol: "X",
+            score: 0
+        };
+    });
+
+    test.each([
+        {  // Top Row Wins
+            0: { id: "a1", innerText: "X" },
+            1: { id: "a2", innerText: "X" },
+            2: { id: "a3", innerText: "X" },
+            3: { id: "b1", innerText: "?" },
+            4: { id: "b2", innerText: "?" },
+            5: { id: "b3", innerText: "?" },
+            6: { id: "c1", innerText: "?" },
+            7: { id: "c2", innerText: "?" },
+            8: { id: "c3", innerText: "?" },
+        },
+        {  //  // Middle Row Wins
+            0: { id: "a1", innerText: "?" },
+            1: { id: "a2", innerText: "?" },
+            2: { id: "a3", innerText: "?" },
+            3: { id: "b1", innerText: "X" },
+            4: { id: "b2", innerText: "X" },
+            5: { id: "b3", innerText: "X" },
+            6: { id: "c1", innerText: "?" },
+            7: { id: "c2", innerText: "?" },
+            8: { id: "c3", innerText: "?" },
+        },
+        {  //  Bottom Row Wins
+            0: { id: "a1", innerText: "?" },
+            1: { id: "a2", innerText: "?" },
+            2: { id: "a3", innerText: "?" },
+            3: { id: "b1", innerText: "?" },
+            4: { id: "b2", innerText: "?" },
+            5: { id: "b3", innerText: "?" },
+            6: { id: "c1", innerText: "X" },
+            7: { id: "c2", innerText: "X" },
+            8: { id: "c3", innerText: "X" },
+        },
+        {  //  Left Column Wins
+            0: { id: "a1", innerText: "X" },
+            1: { id: "a2", innerText: "?" },
+            2: { id: "a3", innerText: "?" },
+            3: { id: "b1", innerText: "X" },
+            4: { id: "b2", innerText: "?" },
+            5: { id: "b3", innerText: "?" },
+            6: { id: "c1", innerText: "X" },
+            7: { id: "c2", innerText: "?" },
+            8: { id: "c3", innerText: "?" },
+        },
+        {  //  Centre Column Wins
+            0: { id: "a1", innerText: "?" },
+            1: { id: "a2", innerText: "X" },
+            2: { id: "a3", innerText: "?" },
+            3: { id: "b1", innerText: "?" },
+            4: { id: "b2", innerText: "X" },
+            5: { id: "b3", innerText: "?" },
+            6: { id: "c1", innerText: "?" },
+            7: { id: "c2", innerText: "X" },
+            8: { id: "c3", innerText: "?" },
+        },
+        {  //  Right Column Wins
+            0: { id: "a1", innerText: "?" },
+            1: { id: "a2", innerText: "?" },
+            2: { id: "a3", innerText: "X" },
+            3: { id: "b1", innerText: "?" },
+            4: { id: "b2", innerText: "?" },
+            5: { id: "b3", innerText: "X" },
+            6: { id: "c1", innerText: "?" },
+            7: { id: "c2", innerText: "?" },
+            8: { id: "c3", innerText: "X" },
+        },
+        {  //  Top left, centre, bottom right Wins
+            0: { id: "a1", innerText: "X" },
+            1: { id: "a2", innerText: "?" },
+            2: { id: "a3", innerText: "?" },
+            3: { id: "b1", innerText: "?" },
+            4: { id: "b2", innerText: "X" },
+            5: { id: "b3", innerText: "?" },
+            6: { id: "c1", innerText: "?" },
+            7: { id: "c2", innerText: "?" },
+            8: { id: "c3", innerText: "X" },
+        },
+        {  //  Top Right, centre, bottom left Wins
+            0: { id: "a1", innerText: "?" },
+            1: { id: "a2", innerText: "?" },
+            2: { id: "a3", innerText: "X" },
+            3: { id: "b1", innerText: "?" },
+            4: { id: "b2", innerText: "X" },
+            5: { id: "b3", innerText: "?" },
+            6: { id: "c1", innerText: "X" },
+            7: { id: "c2", innerText: "?" },
+            8: { id: "c3", innerText: "?" },
+        },
+
+
+        ["a3", "b2", "c1"] // Loft right to bottom left diagonal
+    ])("All winning criteria should return true", (tiles) => {
+        expect(checkWinStatus(tiles, playerTest)).toBe(true)
+    })
+})
+
