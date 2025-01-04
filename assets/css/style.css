@@ -64,6 +64,8 @@ body {
     border-right: 2px solid rgb(100, 100, 100);
     margin: 3px;
     border-radius: 15px;
+    font-size: 72px;
+
 
     /* Prevent the text from being selected when clicking tiles */
     -webkit-user-select: none; /* Safari */
