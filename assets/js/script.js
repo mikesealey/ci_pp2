@@ -10,7 +10,12 @@ let computer = {
     score: 0
 }
 
+let winStatus = false
+
 function selectTile(tile, player) {
+    if (winStatus) { // If someone has already won, don't run
+        return
+    }
     if (tile.innerText === "?"){
         tile.innerText = player.symbol
         $("#console").append(`<div>${player.name} selected ${tile.id}</div>`)
@@ -22,19 +27,27 @@ function selectTile(tile, player) {
 }
 
 function computerSelectTile(){
-    let possibleTiles = $('.tile').filter(function() {
-        return $(this).text() === '?'
-    })
-    console.log(possibleTiles.length)
+    if (winStatus) { // If someone has already won, don't run
+        return
+    }
+    $("#console").append(`<div>${computer.name} is thinking</div>`)
+    // setTimeout to random time betweet 1 and 5 seconds to give the ilusion of thinking, then choose a tile
+    setTimeout(() => {
+        let possibleTiles = $('.tile').filter(function() {
+            return $(this).text() === '?'
+        })
     
-
-    let index = Math.floor(Math.random() * possibleTiles.length)
-    possibleTiles.length ? selectTile(possibleTiles[index], computer) : ""
+        let index = Math.floor(Math.random() * possibleTiles.length)
+        possibleTiles.length ? selectTile(possibleTiles[index], computer) : ""
+    }, Math.ceil(Math.random() * 5000)
+    )
+    
 }
 
 function checkWinStatus(tiles, player) {
-    console.log(tiles)
-    let winStatus = false
+    if (winStatus) { // If someone has already won, don't run
+        return
+    }
     let playersTiles = []
     // tiles comes in as an object
     let tileKeys = Object.keys(tiles)
@@ -46,9 +59,6 @@ function checkWinStatus(tiles, player) {
             playersTiles.push(tiles[tileKey].id)
         }
     })
-
-    console.log(playersTiles)
-    
     
     //Check each player's tiles against winning patterns
     let winningPatterns = [
@@ -69,6 +79,7 @@ function checkWinStatus(tiles, player) {
     })
 
     winStatus ? console.log("Someone won!!") : ""
+    winStatus ?  $("#console").append(`<div>${player.name} wins!</div>`) : ""
     return winStatus
 }
 
@@ -81,6 +92,7 @@ $(document).ready(function () {
 
     $("#test").on("click", function() {
         computerSelectTile()
+        checkWinStatus($(".tile"), computer)
     })
 
 });
