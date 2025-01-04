@@ -18,14 +18,18 @@ function selectTile(tile, player) {
     if (winStatus) { // If someone has already won, don't run
         return
     }
+
     if (tile.innerText === "?"){
         tile.innerText = player.symbol
         $("#console").append(`<div>${player.name} selected ${tile.id}</div>`)
         player.score += 1
+        return true
     } else {
         $("#console").append(`<div>Invalid tile selection - please try again.</div>`)
+        return false // used in playGame function
     }
-    console.log("player " + player.score + ":" + computer.score + " computer")
+
+    // console.log("player " + player.score + ":" + computer.score + " computer")
 }
 
 function computerSelectTile(){
@@ -96,12 +100,14 @@ function checkWinStatus(tiles, player) {
 function playGame() {
     $(".tile").on("click", function () {
         if (currentTurn === player && !winStatus) {
-            selectTile(this, player);
-            checkWinStatus($(".tile"), player);
-
-            if (!winStatus) {
-                currentTurn = computer; // Switch to computer's turn
-                computerSelectTile();
+            const isValidSelection = selectTile(this, player);
+            if (isValidSelection) {
+                checkWinStatus($(".tile"), player);
+                
+                if (!winStatus) {
+                    currentTurn = computer; // Switch to computer's turn only after a valid move
+                    computerSelectTile();
+                }
             }
         }
     });
