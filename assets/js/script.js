@@ -11,8 +11,10 @@ let computer = {
 }
 
 let winStatus = false
+let currentTurn = player
 
 function selectTile(tile, player) {
+    console.log(currentTurn)
     if (winStatus) { // If someone has already won, don't run
         return
     }
@@ -23,7 +25,7 @@ function selectTile(tile, player) {
     } else {
         $("#console").append(`<div>Invalid tile selection - please try again.</div>`)
     }
-    
+    console.log("player " + player.score + ":" + computer.score + " computer")
 }
 
 function computerSelectTile(){
@@ -33,12 +35,20 @@ function computerSelectTile(){
     $("#console").append(`<div>${computer.name} is thinking</div>`)
     // setTimeout to random time betweet 1 and 5 seconds to give the ilusion of thinking, then choose a tile
     setTimeout(() => {
-        let possibleTiles = $('.tile').filter(function() {
-            return $(this).text() === '?'
-        })
-    
-        let index = Math.floor(Math.random() * possibleTiles.length)
-        possibleTiles.length ? selectTile(possibleTiles[index], computer) : ""
+        let possibleTiles = $(".tile").filter(function() {
+            return $(this).text() === '?';
+        });
+
+        if (possibleTiles.length > 0) {
+            let index = Math.floor(Math.random() * possibleTiles.length);
+            selectTile(possibleTiles[index], computer);
+            checkWinStatus($(".tile"), computer);
+
+            if (!winStatus) {
+                currentTurn = player; // Switch turn back to the player
+                $("#console").append(`<div>${player.name}, it's your turn!</div>`);
+            }
+        }
     }, Math.ceil(Math.random() * 5000)
     )
     
@@ -83,18 +93,43 @@ function checkWinStatus(tiles, player) {
     return winStatus
 }
 
-$(document).ready(function () {
-    // Event listener for Clicking on Tiles
-    $('.tile').on('click', function() {
-        selectTile(this, player);
-        checkWinStatus($('.tile'), player)
+function playGame() {
+    $(".tile").on("click", function () {
+        if (currentTurn === player && !winStatus) {
+            selectTile(this, player);
+            checkWinStatus($(".tile"), player);
+
+            if (!winStatus) {
+                currentTurn = computer; // Switch to computer's turn
+                computerSelectTile();
+            }
+        }
     });
 
-    $("#test").on("click", function() {
-        computerSelectTile()
-        checkWinStatus($(".tile"), computer)
-    })
+    $("#reset").on("click", function () {
+        resetGame();
+    });
+}
 
+function resetGame() {
+    $(".tile").text("?").on("click", function () {
+        if (currentTurn === player && !winStatus) {
+            selectTile(this, player);
+            checkWinStatus($(".tile"), player);
+
+            if (!winStatus) {
+                currentTurn = computer;
+                computerSelectTile();
+            }
+        }
+    });
+    $("#console").empty();
+    winStatus = false;
+    currentTurn = player;
+}
+
+$(document).ready(function () {
+    playGame()
 });
 
 module.exports = { selectTile, computerSelectTile, checkWinStatus }

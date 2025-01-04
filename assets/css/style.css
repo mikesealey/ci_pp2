@@ -64,7 +64,13 @@ body {
     border-right: 2px solid rgb(100, 100, 100);
     margin: 3px;
     border-radius: 15px;
+
+    /* Prevent the text from being selected when clicking tiles */
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
 }
+
 
 #console {
     display: flex;

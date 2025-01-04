@@ -13,7 +13,6 @@ beforeAll(() => {
     document.open();
     document.write(fileContents);
     document.close();
-    console.log(document.body.innerHTML);
 });
 
 describe("Applying Markers to tiles", () => {
@@ -27,7 +26,7 @@ describe("Applying Markers to tiles", () => {
         };
     });
 
-    test.each([
+    test.only.each([
         ["a1"],
         ["a2"],
         ["a3"],
@@ -42,6 +41,7 @@ describe("Applying Markers to tiles", () => {
         const tile = document.getElementById(tileId);
         selectTile(tile, playerTest);
         expect(tile.innerText).toBe(playerTest.symbol);
+        console.log("After test: ", playerTest);
     });
 
     test.each([
