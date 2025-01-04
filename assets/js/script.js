@@ -129,7 +129,7 @@ function resetGame() {
             }
         }
     });
-    $("#console").empty();
+    $("#console").append("<div>Welcome to TicTacToe</div>");
     winStatus = false;
     currentTurn = player;
 }
