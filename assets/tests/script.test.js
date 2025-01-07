@@ -176,7 +176,13 @@ describe.skip("Check win-status", ()=> {
 })
 
 describe("Check Draw Status for statemates", ()=> {
-    
+    beforeEach(() => {
+        playerTest = {
+            name: "Mike",
+            symbol: "X",
+            score: 0
+        };
+    });
     test.each([
         {
             "0": {
@@ -787,6 +793,7 @@ describe("Check Draw Status for statemates", ()=> {
             }
         }
     ])("Every completed match with no clear winner", (tiles) => {
+        expect(checkWinStatus(tiles, playerTest)).toBe(false)
         expect(checkDrawStatus(tiles)).toBe(true)
     })
 })
