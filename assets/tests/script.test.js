@@ -175,7 +175,7 @@ describe.skip("Check win-status", ()=> {
     })
 })
 
-describe("Check Draw Status for statemates", ()=> {
+describe("Check Draw Status for staleemates", ()=> {
     beforeEach(() => {
         playerTest = {
             name: "Mike",
