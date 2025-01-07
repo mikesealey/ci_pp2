@@ -62,6 +62,7 @@ function checkWinStatus(tiles, player) {
     if (winStatus) { // If someone has already won, don't run
         return
     }
+
     let playersTiles = []
     // tiles comes in as an object
     let tileKeys = Object.keys(tiles)
@@ -92,9 +93,48 @@ function checkWinStatus(tiles, player) {
         }
     })
 
+    $("#MikeScore").text(player.score)
+    $("#ComputerScore").text(computer.score)
+
     winStatus ? console.log("Someone won!!") : ""
     winStatus ?  $("#console").append(`<div>${player.name} wins!</div>`) : ""
     return winStatus
+}
+
+function checkDrawStatus(tiles){
+    let computerTiles = []
+    let playerTiles = []
+    let remainingTiles = []
+
+    // Loop over tiles to check their content
+    let tileKeys = Object.keys(tiles)
+    tileKeys.forEach((tile) => {
+        // console.log(tiles[tile])
+        if (tiles[tile].innerText === "X") {
+            playerTiles.push(tiles[tile])
+        } else if (tiles[tile].innerText === "O") {
+            computerTiles.push(tiles[tile])
+        } else {
+            remainingTiles.push(tiles[tile])
+        }
+    })
+
+    console.log(computerTiles)
+    console.log(playerTiles)
+    console.log(remainingTiles)
+    // Response should be  0 remaining tiles, and playerTiles.lenght should be 4 or 5, and computerTiles.length should be 4 or 5
+    if (remainingTiles.length) {
+        //If there are still tiles left to chose, it can't be a draw
+        return false
+    } else if (computerTiles.length === 5 && playerTiles.length === 4) {
+        // If the computer has 5 and the player has 4, it must be a draw
+        return true
+    } else if (computerTiles.length === 4 && playerTiles.length === 5) {
+        // If the computer has 4 tiles, and the player has 5, and nobody has won, it must be a draw
+        return true
+    }
+
+
 }
 
 function playGame() {
@@ -112,9 +152,10 @@ function playGame() {
         }
     });
 
-    $("#reset").on("click", function () {
-        resetGame();
-    });
+    
+     
+    
+    
 }
 
 function resetGame() {
@@ -134,8 +175,15 @@ function resetGame() {
     currentTurn = player;
 }
 
+function welcome() {
+    $("#console").append("<div>To get started, click a tile</div>")
+    
+    $(".tile").on("click", playGame())
+}
+
 $(document).ready(function () {
-    playGame()
+    welcome()
+    
 });
 
-module.exports = { selectTile, computerSelectTile, checkWinStatus }
+module.exports = { selectTile, computerSelectTile, checkWinStatus, checkDrawStatus }

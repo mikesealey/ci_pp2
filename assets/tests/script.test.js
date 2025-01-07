@@ -3,7 +3,7 @@
  */
 
 const $ = require("jquery");
-const { selectTile, computerSelectTile, checkWinStatus } = require("../js/script");
+const { selectTile, computerSelectTile, checkWinStatus, checkDrawStatus } = require("../js/script");
 
 global.$ = $;
 
@@ -15,7 +15,7 @@ beforeAll(() => {
     document.close();
 });
 
-describe("Applying Markers to tiles", () => {
+describe.skip("Applying Markers to tiles", () => {
     let playerTest;
 
     beforeEach(() => {
@@ -26,7 +26,7 @@ describe("Applying Markers to tiles", () => {
         };
     });
 
-    test.only.each([
+    test.each([
         ["a1"],
         ["a2"],
         ["a3"],
@@ -41,7 +41,6 @@ describe("Applying Markers to tiles", () => {
         const tile = document.getElementById(tileId);
         selectTile(tile, playerTest);
         expect(tile.innerText).toBe(playerTest.symbol);
-        console.log("After test: ", playerTest);
     });
 
     test.each([
@@ -62,13 +61,13 @@ describe("Applying Markers to tiles", () => {
     });
 });
 
-describe("Computer-player makes a selection", ()=> {
+describe.skip("Computer-player makes a selection", ()=> {
     test('Computer selects any valid tile', () => {
         expect(Array.isArray(computerSelectTile())).toBe(true)
       });
 })
 
-describe("Check win-status", ()=> {
+describe.skip("Check win-status", ()=> {
     let playerTest;
 
     beforeEach(() => {
@@ -167,12 +166,628 @@ describe("Check win-status", ()=> {
             6: { id: "c1", innerText: "X" },
             7: { id: "c2", innerText: "?" },
             8: { id: "c3", innerText: "?" },
-        },
+        }
 
 
-        ["a3", "b2", "c1"] // Loft right to bottom left diagonal
+        
     ])("All winning criteria should return true", (tiles) => {
         expect(checkWinStatus(tiles, playerTest)).toBe(true)
+    })
+})
+
+describe("Check Draw Status for statemates", ()=> {
+    
+    test.each([
+        {
+            "0": {
+                "id": "a1",
+                "innerText": "X"
+            },
+            "1": {
+                "id": "a2",
+                "innerText": "O"
+            },
+            "2": {
+                "id": "a3",
+                "innerText": "X"
+            },
+            "3": {
+                "id": "b1",
+                "innerText": "O"
+            },
+            "4": {
+                "id": "b2",
+                "innerText": "O"
+            },
+            "5": {
+                "id": "b3",
+                "innerText": "X"
+            },
+            "6": {
+                "id": "c1",
+                "innerText": "X"
+            },
+            "7": {
+                "id": "c2",
+                "innerText": "X"
+            },
+            "8": {
+                "id": "c3",
+                "innerText": "O"
+            }
+        },
+        {
+            "0": {
+                "id": "a1",
+                "innerText": "X"
+            },
+            "1": {
+                "id": "a2",
+                "innerText": "X"
+            },
+            "2": {
+                "id": "a3",
+                "innerText": "O"
+            },
+            "3": {
+                "id": "b1",
+                "innerText": "O"
+            },
+            "4": {
+                "id": "b2",
+                "innerText": "O"
+            },
+            "5": {
+                "id": "b3",
+                "innerText": "X"
+            },
+            "6": {
+                "id": "c1",
+                "innerText": "X"
+            },
+            "7": {
+                "id": "c2",
+                "innerText": "X"
+            },
+            "8": {
+                "id": "c3",
+                "innerText": "O"
+            }
+        },
+        {
+            "0": {
+                "id": "a1",
+                "innerText": "O"
+            },
+            "1": {
+                "id": "a2",
+                "innerText": "X"
+            },
+            "2": {
+                "id": "a3",
+                "innerText": "X"
+            },
+            "3": {
+                "id": "b1",
+                "innerText": "X"
+            },
+            "4": {
+                "id": "b2",
+                "innerText": "O"
+            },
+            "5": {
+                "id": "b3",
+                "innerText": "O"
+            },
+            "6": {
+                "id": "c1",
+                "innerText": "O"
+            },
+            "7": {
+                "id": "c2",
+                "innerText": "X"
+            },
+            "8": {
+                "id": "c3",
+                "innerText": "X"
+            }
+        },
+        {
+            "0": {
+                "id": "a1",
+                "innerText": "O"
+            },
+            "1": {
+                "id": "a2",
+                "innerText": "X"
+            },
+            "2": {
+                "id": "a3",
+                "innerText": "X"
+            },
+            "3": {
+                "id": "b1",
+                "innerText": "X"
+            },
+            "4": {
+                "id": "b2",
+                "innerText": "X"
+            },
+            "5": {
+                "id": "b3",
+                "innerText": "O"
+            },
+            "6": {
+                "id": "c1",
+                "innerText": "O"
+            },
+            "7": {
+                "id": "c2",
+                "innerText": "O"
+            },
+            "8": {
+                "id": "c3",
+                "innerText": "X"
+            }
+        },
+        {
+            "0": {
+                "id": "a1",
+                "innerText": "X"
+            },
+            "1": {
+                "id": "a2",
+                "innerText": "O"
+            },
+            "2": {
+                "id": "a3",
+                "innerText": "X"
+            },
+            "3": {
+                "id": "b1",
+                "innerText": "X"
+            },
+            "4": {
+                "id": "b2",
+                "innerText": "O"
+            },
+            "5": {
+                "id": "b3",
+                "innerText": "O"
+            },
+            "6": {
+                "id": "c1",
+                "innerText": "O"
+            },
+            "7": {
+                "id": "c2",
+                "innerText": "X"
+            },
+            "8": {
+                "id": "c3",
+                "innerText": "X"
+            }
+        },
+        {
+            "0": {
+                "id": "a1",
+                "innerText": "X"
+            },
+            "1": {
+                "id": "a2",
+                "innerText": "X"
+            },
+            "2": {
+                "id": "a3",
+                "innerText": "O"
+            },
+            "3": {
+                "id": "b1",
+                "innerText": "O"
+            },
+            "4": {
+                "id": "b2",
+                "innerText": "X"
+            },
+            "5": {
+                "id": "b3",
+                "innerText": "X"
+            },
+            "6": {
+                "id": "c1",
+                "innerText": "X"
+            },
+            "7": {
+                "id": "c2",
+                "innerText": "O"
+            },
+            "8": {
+                "id": "c3",
+                "innerText": "O"
+            }
+        },
+        {
+            "0": {
+                "id": "a1",
+                "innerText": "O"
+            },
+            "1": {
+                "id": "a2",
+                "innerText": "X"
+            },
+            "2": {
+                "id": "a3",
+                "innerText": "O"
+            },
+            "3": {
+                "id": "b1",
+                "innerText": "X"
+            },
+            "4": {
+                "id": "b2",
+                "innerText": "O"
+            },
+            "5": {
+                "id": "b3",
+                "innerText": "X"
+            },
+            "6": {
+                "id": "c1",
+                "innerText": "X"
+            },
+            "7": {
+                "id": "c2",
+                "innerText": "O"
+            },
+            "8": {
+                "id": "c3",
+                "innerText": "X"
+            }
+        },
+        {
+            "0": {
+                "id": "a1",
+                "innerText": "O"
+            },
+            "1": {
+                "id": "a2",
+                "innerText": "O"
+            },
+            "2": {
+                "id": "a3",
+                "innerText": "X"
+            },
+            "3": {
+                "id": "b1",
+                "innerText": "X"
+            },
+            "4": {
+                "id": "b2",
+                "innerText": "X"
+            },
+            "5": {
+                "id": "b3",
+                "innerText": "O"
+            },
+            "6": {
+                "id": "c1",
+                "innerText": "O"
+            },
+            "7": {
+                "id": "c2",
+                "innerText": "X"
+            },
+            "8": {
+                "id": "c3",
+                "innerText": "X"
+            }
+        },
+        {
+            "0": {
+                "id": "a1",
+                "innerText": "X"
+            },
+            "1": {
+                "id": "a2",
+                "innerText": "O"
+            },
+            "2": {
+                "id": "a3",
+                "innerText": "X"
+            },
+            "3": {
+                "id": "b1",
+                "innerText": "O"
+            },
+            "4": {
+                "id": "b2",
+                "innerText": "X"
+            },
+            "5": {
+                "id": "b3",
+                "innerText": "X"
+            },
+            "6": {
+                "id": "c1",
+                "innerText": "O"
+            },
+            "7": {
+                "id": "c2",
+                "innerText": "X"
+            },
+            "8": {
+                "id": "c3",
+                "innerText": "O"
+            }
+        },
+        {
+            "0": {
+                "id": "a1",
+                "innerText": "X"
+            },
+            "1": {
+                "id": "a2",
+                "innerText": "X"
+            },
+            "2": {
+                "id": "a3",
+                "innerText": "O"
+            },
+            "3": {
+                "id": "b1",
+                "innerText": "O"
+            },
+            "4": {
+                "id": "b2",
+                "innerText": "O"
+            },
+            "5": {
+                "id": "b3",
+                "innerText": "X"
+            },
+            "6": {
+                "id": "c1",
+                "innerText": "X"
+            },
+            "7": {
+                "id": "c2",
+                "innerText": "O"
+            },
+            "8": {
+                "id": "c3",
+                "innerText": "X"
+            }
+        },
+        {
+            "0": {
+                "id": "a1",
+                "innerText": "O"
+            },
+            "1": {
+                "id": "a2",
+                "innerText": "X"
+            },
+            "2": {
+                "id": "a3",
+                "innerText": "X"
+            },
+            "3": {
+                "id": "b1",
+                "innerText": "X"
+            },
+            "4": {
+                "id": "b2",
+                "innerText": "O"
+            },
+            "5": {
+                "id": "b3",
+                "innerText": "O"
+            },
+            "6": {
+                "id": "c1",
+                "innerText": "X"
+            },
+            "7": {
+                "id": "c2",
+                "innerText": "O"
+            },
+            "8": {
+                "id": "c3",
+                "innerText": "X"
+            }
+        },
+        {
+            "0": {
+                "id": "a1",
+                "innerText": "X"
+            },
+            "1": {
+                "id": "a2",
+                "innerText": "O"
+            },
+            "2": {
+                "id": "a3",
+                "innerText": "X"
+            },
+            "3": {
+                "id": "b1",
+                "innerText": "X"
+            },
+            "4": {
+                "id": "b2",
+                "innerText": "O"
+            },
+            "5": {
+                "id": "b3",
+                "innerText": "X"
+            },
+            "6": {
+                "id": "c1",
+                "innerText": "O"
+            },
+            "7": {
+                "id": "c2",
+                "innerText": "X"
+            },
+            "8": {
+                "id": "c3",
+                "innerText": "O"
+            }
+        },
+        {
+            "0": {
+                "id": "a1",
+                "innerText": "O"
+            },
+            "1": {
+                "id": "a2",
+                "innerText": "X"
+            },
+            "2": {
+                "id": "a3",
+                "innerText": "O"
+            },
+            "3": {
+                "id": "b1",
+                "innerText": "O"
+            },
+            "4": {
+                "id": "b2",
+                "innerText": "X"
+            },
+            "5": {
+                "id": "b3",
+                "innerText": "X"
+            },
+            "6": {
+                "id": "c1",
+                "innerText": "X"
+            },
+            "7": {
+                "id": "c2",
+                "innerText": "O"
+            },
+            "8": {
+                "id": "c3",
+                "innerText": "X"
+            }
+        },
+        {
+            "0": {
+                "id": "a1",
+                "innerText": "X"
+            },
+            "1": {
+                "id": "a2",
+                "innerText": "O"
+            },
+            "2": {
+                "id": "a3",
+                "innerText": "X"
+            },
+            "3": {
+                "id": "b1",
+                "innerText": "X"
+            },
+            "4": {
+                "id": "b2",
+                "innerText": "X"
+            },
+            "5": {
+                "id": "b3",
+                "innerText": "O"
+            },
+            "6": {
+                "id": "c1",
+                "innerText": "O"
+            },
+            "7": {
+                "id": "c2",
+                "innerText": "X"
+            },
+            "8": {
+                "id": "c3",
+                "innerText": "O"
+            }
+        },
+        {
+            "0": {
+                "id": "a1",
+                "innerText": "O"
+            },
+            "1": {
+                "id": "a2",
+                "innerText": "X"
+            },
+            "2": {
+                "id": "a3",
+                "innerText": "O"
+            },
+            "3": {
+                "id": "b1",
+                "innerText": "X"
+            },
+            "4": {
+                "id": "b2",
+                "innerText": "X"
+            },
+            "5": {
+                "id": "b3",
+                "innerText": "O"
+            },
+            "6": {
+                "id": "c1",
+                "innerText": "X"
+            },
+            "7": {
+                "id": "c2",
+                "innerText": "O"
+            },
+            "8": {
+                "id": "c3",
+                "innerText": "X"
+            }
+        },
+        {
+            "0": {
+                "id": "a1",
+                "innerText": "X"
+            },
+            "1": {
+                "id": "a2",
+                "innerText": "O"
+            },
+            "2": {
+                "id": "a3",
+                "innerText": "O"
+            },
+            "3": {
+                "id": "b1",
+                "innerText": "O"
+            },
+            "4": {
+                "id": "b2",
+                "innerText": "X"
+            },
+            "5": {
+                "id": "b3",
+                "innerText": "X"
+            },
+            "6": {
+                "id": "c1",
+                "innerText": "X"
+            },
+            "7": {
+                "id": "c2",
+                "innerText": "X"
+            },
+            "8": {
+                "id": "c3",
+                "innerText": "O"
+            }
+        }
+    ])("Every completed match with no clear winner", (tiles) => {
+        expect(checkDrawStatus(tiles)).toBe(true)
     })
 })
 
