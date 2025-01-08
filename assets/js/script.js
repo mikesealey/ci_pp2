@@ -2,17 +2,29 @@ let player = {
     name: "MikeTest",
     symbol: "X",
     score: 0
-}
+} // swwap for const
 
 let computer = {
     name: "Computer",
     symbol: "O",
     score: 0
-}
+} // swap for const
 
 let winStatus = false
+let drawStatus = false
 let currentTurn = player
 
+function forceDraw(){
+    drawStatus = true
+}
+/**
+ * Invoke with the clicked-on tile, and the current player.
+ * Set the current player's symbol as the tile's inner-text
+ * 
+ * @param {object} tile 
+ * @param {object} player 
+ * @returns
+ */
 function selectTile(tile, player) {
     console.log(currentTurn)
     if (winStatus) { // If someone has already won, don't run
@@ -36,6 +48,11 @@ function computerSelectTile(){
     if (winStatus) { // If someone has already won, don't run
         return
     }
+    checkDrawStatus($(".tiles"))
+    if (drawStatus) {
+        console.log("Draw!")
+        return
+    }
     $("#console").append(`<div>${computer.name} is thinking</div>`)
     // setTimeout to random time betweet 1 and 5 seconds to give the ilusion of thinking, then choose a tile
     setTimeout(() => {
@@ -53,7 +70,7 @@ function computerSelectTile(){
                 $("#console").append(`<div>${player.name}, it's your turn!</div>`);
             }
         }
-    }, Math.ceil(Math.random() * 5000)
+    }, Math.ceil(Math.random() * 5) // should be 5000, changed for testing purposes
     )
     
 }
@@ -62,6 +79,7 @@ function checkWinStatus(tiles, player) {
     if (winStatus) { // If someone has already won, don't run
         return
     }
+    
 
     let playersTiles = []
     // tiles comes in as an object
@@ -125,12 +143,15 @@ function checkDrawStatus(tiles){
     // Response should be  0 remaining tiles, and playerTiles.lenght should be 4 or 5, and computerTiles.length should be 4 or 5
     if (remainingTiles.length) {
         //If there are still tiles left to chose, it can't be a draw
+        drawStatus = false 
         return false
     } else if (computerTiles.length === 5 && playerTiles.length === 4) {
         // If the computer has 5 and the player has 4, it must be a draw
+        drawStatus = true
         return true
     } else if (computerTiles.length === 4 && playerTiles.length === 5) {
         // If the computer has 4 tiles, and the player has 5, and nobody has won, it must be a draw
+        drawStatus = true
         return true
     }
 
@@ -144,7 +165,7 @@ function playGame() {
             if (isValidSelection) {
                 checkWinStatus($(".tile"), player);
                 
-                if (!winStatus) {
+                if (!winStatus && !drawStatus) {
                     currentTurn = computer; // Switch to computer's turn only after a valid move
                     computerSelectTile();
                 }
