@@ -1,14 +1,14 @@
-let player = {
+const player = {
     name: "MikeTest",
     symbol: "X",
     score: 0
-} // swwap for const
+}
 
-let computer = {
+const computer = {
     name: "Computer",
     symbol: "O",
     score: 0
-} // swap for const
+}
 
 let winStatus = false
 let drawStatus = false
