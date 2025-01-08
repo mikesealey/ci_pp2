@@ -14,9 +14,20 @@ let winStatus = false
 let drawStatus = false
 let currentTurn = player
 
-function forceDraw(){
-    drawStatus = true
-}
+$("#forceDraw").on("click", ()=> {
+    $("#a1").text("X")
+    $("#a2").text("O")
+    $("#a3").text("X")
+    $("#b1").text("O")
+    $("#b2").text("O")
+    $("#b3").text("X")
+    $("#c1").text("X")
+    $("#c2").text("X")
+    $("#c3").text("O")
+
+
+    checkDrawStatus($(".tile"))
+}) 
 /**
  * Invoke with the clicked-on tile, and the current player.
  * Set the current player's symbol as the tile's inner-text
@@ -86,6 +97,7 @@ function computerSelectTile(){
  * @returns 
  */
 function checkWinStatus(tiles, player) {
+    console.log("Checking for a winner")
     if (winStatus) { // If someone has already won, don't run
         return
     }
@@ -126,6 +138,7 @@ function checkWinStatus(tiles, player) {
 
     winStatus ? console.log("Someone won!!") : ""
     winStatus ?  $("#console").append(`<div>${player.name} wins!</div>`) : ""
+    console.log(winStatus)
     return winStatus
 }
 
@@ -138,6 +151,7 @@ function checkWinStatus(tiles, player) {
  * @returns 
  */
 function checkDrawStatus(tiles){
+    console.log("Checking draw status")
     let computerTiles = []
     let playerTiles = []
     let remainingTiles = []
@@ -158,19 +172,19 @@ function checkDrawStatus(tiles){
     console.log(computerTiles)
     console.log(playerTiles)
     console.log(remainingTiles)
-    // Response should be  0 remaining tiles, and playerTiles.lenght should be 4 or 5, and computerTiles.length should be 4 or 5
-    if (remainingTiles.length) {
-        //If there are still tiles left to chose, it can't be a draw
-        drawStatus = false 
-        return false
-    } else if (computerTiles.length === 5 && playerTiles.length === 4) {
+    console.log("Draw status: " + drawStatus)
+    if (computerTiles.length === 5 && playerTiles.length === 4) {
         // If the computer has 5 and the player has 4, it must be a draw
         drawStatus = true
+        console.log("Draw status: " + drawStatus)
         return true
     } else if (computerTiles.length === 4 && playerTiles.length === 5) {
         // If the computer has 4 tiles, and the player has 5, and nobody has won, it must be a draw
         drawStatus = true
+        console.log("Draw status: " + drawStatus)
         return true
+    } else {
+        return false
     }
 
 
