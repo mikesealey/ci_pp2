@@ -44,6 +44,10 @@ function selectTile(tile, player) {
     // console.log("player " + player.score + ":" + computer.score + " computer")
 }
 
+/**
+ * Runs the computer's turn
+ * Finds all available tiles and selects one as it's own
+ */
 function computerSelectTile(){
     if (winStatus) { // If someone has already won, don't run
         return
@@ -74,7 +78,13 @@ function computerSelectTile(){
     )
     
 }
-
+/**
+ * Invoke witth $(".tile") (all tiles on the board) and currentPlayer
+ * Checks if the currentPlayer has won by comparing their symbol against winningPatters
+ * @param {object} tiles 
+ * @param {object} player 
+ * @returns 
+ */
 function checkWinStatus(tiles, player) {
     if (winStatus) { // If someone has already won, don't run
         return
@@ -119,6 +129,14 @@ function checkWinStatus(tiles, player) {
     return winStatus
 }
 
+/**
+ * Invoke with $(".tiles")
+ * returns false if the game is incomplete, or not a draw
+ * returns true if the game has been completed
+ * Should be used in conjunction with checkWinStatus
+ * @param {object} tiles 
+ * @returns 
+ */
 function checkDrawStatus(tiles){
     let computerTiles = []
     let playerTiles = []
@@ -158,6 +176,12 @@ function checkDrawStatus(tiles){
 
 }
 
+/**
+ * Invoked by the welcome function
+ * Takes no parameters/arguments
+ * returns nothing as a function
+ * switches betwween player and computer taking turns to select tiles
+ */
 function playGame() {
     $(".tile").on("click", function () {
         if (currentTurn === player && !winStatus) {
@@ -179,7 +203,11 @@ function playGame() {
     
 }
 
+/**
+ * When invoked, resets the game-board back to a fresh match
+ */
 function resetGame() {
+    // TODO: Finish this function so that players can play multiple back-to-back matches
     $(".tile").text("?").on("click", function () {
         if (currentTurn === player && !winStatus) {
             selectTile(this, player);
@@ -196,6 +224,11 @@ function resetGame() {
     currentTurn = player;
 }
 
+/**
+ * Takes no arguments/parameters
+ * Greets the user, and invites them to play a match
+ * listens out for a click on the game board, which invokes playGame
+ */
 function welcome() {
     $("#console").append("<div>To get started, click a tile</div>")
     
