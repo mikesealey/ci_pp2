@@ -37,7 +37,7 @@ $("#forceDraw").on("click", ()=> {
  * @returns
  */
 function selectTile(tile, player) {
-    console.log(currentTurn)
+    // console.log(currentTurn)
     if (winStatus) { // If someone has already won, don't run
         return
     }
@@ -65,7 +65,7 @@ function computerSelectTile(){
     }
     checkDrawStatus($(".tiles"))
     if (drawStatus) {
-        console.log("Draw!")
+        // console.log("Draw!")
         return
     }
     $("#console").append(`<div>${computer.name} is thinking</div>`)
@@ -97,7 +97,7 @@ function computerSelectTile(){
  * @returns 
  */
 function checkWinStatus(tiles, player) {
-    console.log("Checking for a winner")
+    // console.log("Checking for a winner")
     if (winStatus) { // If someone has already won, don't run
         return
     }
@@ -151,7 +151,7 @@ function checkWinStatus(tiles, player) {
  * @returns 
  */
 function checkDrawStatus(tiles){
-    console.log("Checking draw status")
+    // console.log("Checking draw status")
     let computerTiles = []
     let playerTiles = []
     let remainingTiles = []
@@ -169,19 +169,13 @@ function checkDrawStatus(tiles){
         }
     })
 
-    console.log(computerTiles)
-    console.log(playerTiles)
-    console.log(remainingTiles)
-    console.log("Draw status: " + drawStatus)
     if (computerTiles.length === 5 && playerTiles.length === 4) {
         // If the computer has 5 and the player has 4, it must be a draw
         drawStatus = true
-        console.log("Draw status: " + drawStatus)
         return true
     } else if (computerTiles.length === 4 && playerTiles.length === 5) {
         // If the computer has 4 tiles, and the player has 5, and nobody has won, it must be a draw
         drawStatus = true
-        console.log("Draw status: " + drawStatus)
         return true
     } else {
         return false
@@ -197,12 +191,27 @@ function checkDrawStatus(tiles){
  * switches betwween player and computer taking turns to select tiles
  */
 function playGame() {
+    console.log("PlayGame function invoked")
     $(".tile").on("click", function () {
-        if (currentTurn === player && !winStatus) {
+        if (currentTurn === player && !winStatus && !drawStatus) {
             const isValidSelection = selectTile(this, player);
             if (isValidSelection) {
-                checkWinStatus($(".tile"), player);
+
+                if (checkWinStatus($(".tile"), currentTurn)) {
+                    $("#console").append(`<div>${player.name} has won the game!</div>`)
+                    $("#console").append(`<div>Click a tile to reset the board and play again`)
+                    // And use resetGame to play another
+                    $(".tile").on("click", () => {
+                        resetGame("win", player)
+                    })
+                }
                 
+                if (checkDrawStatus($(".tile"))) {
+                    $("#console").append(`<div>It's a draw</div>`)
+                    // And use resetGame to play another
+                    resetGame("draw")
+                }
+
                 if (!winStatus && !drawStatus) {
                     currentTurn = computer; // Switch to computer's turn only after a valid move
                     computerSelectTile();
@@ -219,23 +228,55 @@ function playGame() {
 
 /**
  * When invoked, resets the game-board back to a fresh match
+ * possible reasons game should be reset
+ * win
+ * draw
+ * loss
  */
-function resetGame() {
-    // TODO: Finish this function so that players can play multiple back-to-back matches
-    $(".tile").text("?").on("click", function () {
-        if (currentTurn === player && !winStatus) {
-            selectTile(this, player);
-            checkWinStatus($(".tile"), player);
+function resetGame(reason, winner) {
+    // TODO: Refactor duplicates
+    // Reset the grid
+    $(".tile").text("?")
 
-            if (!winStatus) {
-                currentTurn = computer;
-                computerSelectTile();
-            }
+    if (reason === "win") {
+        // Reset the loser's score to 0
+        if (winner === player) {
+            computer.score = 0
+        } else {
+            player.score = 0
         }
-    });
-    $("#console").append("<div>Welcome to TicTacToe</div>");
-    winStatus = false;
-    currentTurn = player;
+        
+        // Reset statusses
+        winStatus = false
+        drawStatus = false
+        currentTurn = player
+        $("#console").append(`<div>New game! ${player.name}, it's your turn!</div>`);
+
+        // .off(click) removes old handlers, and then .one(click) triggers playGame
+        $(".tile").off("click").one("click", function () {
+            playGame();
+        });
+
+
+    } else if (reason === "draw") {
+        // Reset the grid
+        $(".tile").text("?")
+        console.log("tiles reset")
+
+        winStatus = false
+        drawStatus = false
+        currentTurn = player
+        $("#console").append(`<div>New game! ${player.name}, it's your turn!</div>`)
+
+        // Reattach the game logic to tiles
+        $(".tile").off("click").one("click", function () {
+            playGame();
+        })
+    } else if (reason === "loss") {
+
+    } else {
+        console.log("incorect reason supplied")
+    }
 }
 
 /**
