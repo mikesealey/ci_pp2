@@ -50,7 +50,7 @@ function computerSelectTile(){
         return
     }
     checkDrawStatus($(".tiles"))
-    if (drawStatus) {
+    if (drawStatus) {  // Check if it's a draw, if it is don't run any further
         // console.log("Draw!")
         return
     }
@@ -61,17 +61,26 @@ function computerSelectTile(){
             return $(this).text() === '?';
         });
 
-        if (possibleTiles.length > 0) {
+        if (possibleTiles.length > 0) { // If there are still tiles left to play
             let index = Math.floor(Math.random() * possibleTiles.length);
             selectTile(possibleTiles[index], computer);
-            checkWinStatus($(".tile"), computer);
+
+            if (checkWinStatus($(".tile"), computer)) { // If the computer wins
+                $("#console").append(`<div>${computer.name} has won the game!</div>`);
+                $("#console").append(`<div>Click a tile to reset the board and play again.</div>`);
+                $(".tile").on("click", () => {
+                    resetGame("loss", computer);
+                });
+                return // No need to run anything else in this function
+            }
+            checkDrawStatus($(".tile"))
 
             if (!winStatus) {
                 currentTurn = player; // Switch turn back to the player
                 $("#console").append(`<div>${player.name}, it's your turn!</div>`);
             }
         }
-    }, Math.ceil(Math.random() * 5) // should be 5000, changed for testing purposes
+    }, Math.ceil(Math.random() * 500) // should be 5000, changed for testing purposes
     )
     
 }
@@ -220,49 +229,31 @@ function playGame() {
  * loss
  */
 function resetGame(reason, winner) {
-    // TODO: Refactor duplicates
     // Reset the grid
-    $(".tile").text("?")
+    $(".tile").text("?");
 
     if (reason === "win") {
-        // Reset the loser's score to 0
         if (winner === player) {
-            computer.score = 0
+            computer.score = 0; // Reset the loser's score
         } else {
-            player.score = 0
+            player.score = 0;
         }
-        
-        // Reset statusses
-        winStatus = false
-        drawStatus = false
-        currentTurn = player
-        $("#console").append(`<div>New game! ${player.name}, it's your turn!</div>`);
-
-        // .off(click) removes old handlers, and then .one(click) triggers playGame
-        $(".tile").off("click").one("click", function () {
-            playGame();
-        });
-
-
     } else if (reason === "draw") {
-        // Reset the grid
-        $(".tile").text("?")
-        console.log("tiles reset")
-
-        winStatus = false
-        drawStatus = false
-        currentTurn = player
-        $("#console").append(`<div>New game! ${player.name}, it's your turn!</div>`)
-
-        // Reattach the game logic to tiles
-        $(".tile").off("click").one("click", function () {
-            playGame();
-        })
+        $("#console").append(`<div>New game! ${player.name}, it's your turn!</div>`);
     } else if (reason === "loss") {
-
-    } else {
-        console.log("incorect reason supplied")
+        player.score = 0; // Reset the player's score
+        $("#console").append(`<div>New game! ${player.name}, it's your turn!</div>`);
     }
+
+    // Reset statuses
+    winStatus = false;
+    drawStatus = false;
+    currentTurn = player;
+
+    // Reattach the game logic to tiles
+    $(".tile").off("click").one("click", function () {
+        playGame();
+    });
 }
 
 /**

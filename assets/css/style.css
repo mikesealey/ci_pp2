@@ -41,7 +41,12 @@ body {
     min-width: 250px;
     max-height: 750px;
     border-radius: 25px;
+    overflow-y: hidden;
 }
+
+/* ::-webkit-scrollbar {
+    border: 1px solid blue;
+} */
 
 .row {
     display: flex;
@@ -65,7 +70,6 @@ body {
     margin: 3px;
     border-radius: 15px;
     font-size: 72px;
-
 
     /* Prevent the text from being selected when clicking tiles */
     -webkit-user-select: none; /* Safari */
