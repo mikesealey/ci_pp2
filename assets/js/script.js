@@ -14,20 +14,6 @@ let winStatus = false
 let drawStatus = false
 let currentTurn = player
 
-$("#forceDraw").on("click", ()=> {
-    $("#a1").text("X")
-    $("#a2").text("O")
-    $("#a3").text("X")
-    $("#b1").text("O")
-    $("#b2").text("O")
-    $("#b3").text("X")
-    $("#c1").text("X")
-    $("#c2").text("X")
-    $("#c3").text("O")
-
-
-    checkDrawStatus($(".tile"))
-}) 
 /**
  * Invoke with the clicked-on tile, and the current player.
  * Set the current player's symbol as the tile's inner-text
