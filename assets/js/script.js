@@ -23,7 +23,6 @@ let currentTurn = player
  * @returns
  */
 function selectTile(tile, player) {
-    // console.log(currentTurn)
     if (winStatus) { // If someone has already won, don't run
         return
     }
@@ -37,8 +36,6 @@ function selectTile(tile, player) {
         $("#console").append(`<div>Invalid tile selection - please try again.</div>`)
         return false // used in playGame function
     }
-
-    // console.log("player " + player.score + ":" + computer.score + " computer")
 }
 
 /**
@@ -51,7 +48,6 @@ function computerSelectTile(){
     }
     checkDrawStatus($(".tiles"))
     if (drawStatus) {  // Check if it's a draw, if it is don't run any further
-        // console.log("Draw!")
         return
     }
     $("#console").append(`<div>${computer.name} is thinking</div>`)
@@ -92,7 +88,6 @@ function computerSelectTile(){
  * @returns 
  */
 function checkWinStatus(tiles, player) {
-    // console.log("Checking for a winner")
     if (winStatus) { // If someone has already won, don't run
         return
     }
@@ -131,9 +126,8 @@ function checkWinStatus(tiles, player) {
     $("#MikeScore").text(player.score)
     $("#ComputerScore").text(computer.score)
 
-    winStatus ? console.log("Someone won!!") : ""
     winStatus ?  $("#console").append(`<div>${player.name} wins!</div>`) : ""
-    console.log(winStatus)
+
     return winStatus
 }
 
@@ -146,7 +140,6 @@ function checkWinStatus(tiles, player) {
  * @returns 
  */
 function checkDrawStatus(tiles){
-    // console.log("Checking draw status")
     let computerTiles = []
     let playerTiles = []
     let remainingTiles = []
@@ -154,7 +147,6 @@ function checkDrawStatus(tiles){
     // Loop over tiles to check their content
     let tileKeys = Object.keys(tiles)
     tileKeys.forEach((tile) => {
-        // console.log(tiles[tile])
         if (tiles[tile].innerText === "X") {
             playerTiles.push(tiles[tile])
         } else if (tiles[tile].innerText === "O") {
@@ -186,7 +178,6 @@ function checkDrawStatus(tiles){
  * switches betwween player and computer taking turns to select tiles
  */
 function playGame() {
-    console.log("PlayGame function invoked")
     $(".tile").on("click", function () {
         if (currentTurn === player && !winStatus && !drawStatus) {
             const isValidSelection = selectTile(this, player);
