@@ -19,7 +19,8 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    height: 750px
+    height: 750px;
+    border: 1px solid red;
 }
 
 @media (max-width: 1000px) {
@@ -35,13 +36,17 @@ body {
     flex-direction: column;
     justify-content: space-around;
     aspect-ratio: 1/1;
+    border: 1px dotted white;
 }
 
 #console {
     min-width: 250px;
     max-height: 750px;
+    max-width: 750px;
+    aspect-ratio: 1/1;
     border-radius: 25px;
     overflow-y: hidden;
+    border: 1px solid fuchsia;
 }
 
 /* ::-webkit-scrollbar {
