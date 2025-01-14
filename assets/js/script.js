@@ -258,7 +258,32 @@ function welcome() {
     $(".tile").on("click", playGame())
 }
 
+/**
+ * Takes a number, and generates a square grid of tiles based on that number
+ * @param {number} gridSize 
+ */
+function generateGrid(size) {
+    const board = $("#board")
+
+    for (let i = 0; i < size; i++) {
+        const alphabet = "abcdefghijklmnopqrstuvwxyz"
+        const rowId = alphabet[i]
+        const row = $(`<div id="${rowId}" class="row"></div>`);
+
+        for (let j = 1; j <= size; j++) {
+            const tileId = `${rowId}${j}`
+            const tile = $(`<div id="${tileId}" class="tile">?</div>`);
+            row.append(tile);
+        }
+
+        board.append(row);
+    }
+
+
+}
+
 $(document).ready(function () {
+    generateGrid(3)
     welcome()
     
 });
