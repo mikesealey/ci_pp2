@@ -1,127 +1,128 @@
 * {
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-
+    font-family: monospace;
 }
 
 body {
-    height: 100vh;
     width: 100vw;
-    overflow: hidden;
+    height: 100vh;
+    background-color: rgb(0, 16, 0);
+    padding: 0 20px;
+    margin: 20px;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
-    background-color: rgb(0, 59, 0);
+    align-items: center;
 }
 
 #title {
-    text-align: center;
-    color: #9bff94b8;
-    font-family: monospace;
-    font-size: 200px;
+    font-size: 40px;
+    color:rgb(0, 255, 0)
 }
 
 #game {
+    width: 80%;
+    margin: 20px;
+    /* border:2px solid rgb(0, 80, 0); */
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
-    border: 10px solid white;
+    display: flex;
+    justify-content: space-between;
 }
-
-
 
 #board {
     display: flex;
+    flex-grow: 1;
     flex-direction: column;
-    justify-content: space-around;
-    aspect-ratio: 1/1 !important;
-}
-
-#console {
-
-    overflow-y: hidden;
-}
-
-#board, #console {
-    flex: 1;
-
-
-    aspect-ratio: 1/1;
-    border: 2px solid red;
-    border-radius: 25px;
+    justify-content: center;
+    
 }
 
 .row {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
-    height: auto;
 }
 
-/* Each of the 9 sections */
 .tile {
-    height: 100%;
-    width: 33%;
-    aspect-ratio: 1/1;
-    text-align: center;
+    /* Dress the tile */
+    border: 1px solid rgb(0, 255, 0);
+    border-radius: 12px;
+    background-color: rgb(0, 160, 0);
+    color: rgb(0, 16, 0);
+    width: 10vw;
+    height: 10vw;
+    padding: 10px;
+    margin: 10px;
+
+    /* Move inner text to centre of tile */
     display: flex;
     flex-direction: column;
+    align-items: center;
     justify-content: space-around;
-    border: 1px solid rgb(199, 199, 199);
-    background-color: #ffffffb8;
-    border-bottom: 3px solid rgb(100, 100, 100);
-    border-right: 2px solid rgb(100, 100, 100);
-    margin: 3px;
-    border-radius: 25px;
-    font-size: 72px;
-
-    /* Prevent the text from being selected when clicking tiles */
-    -webkit-user-select: none; /* Safari */
-    -ms-user-select: none; /* IE 10 and IE 11 */
-    user-select: none; /* Standard syntax */
 }
-
 
 #console {
+    background-color: rgb(0, 160, 0);
+    color: rgb(0, 255, 0);
+    padding: 10px;
     display: flex;
+    flex-grow: 5;
     flex-direction: column;
     justify-content: flex-end;
-    font-family: 'Courier New', Courier, monospace;
-    color: rgb(0, 255, 0);
-    background-color: green;
-    font-weight: 700;
-    width: 100%;
-
+    padding: 10px;
+    height: 80vh;
+    border-radius: 12px;
+    overflow-y: hidden;
+    margin: 10px !important;
 }
 
-#console div { /* Each new div appended to the console */
-    padding: 5px 15px;
+#console div {
+    padding: 10px !important;
 }
 
 @media (max-width: 1000px) {
-    #game {
-        flex-direction: column;
-        align-items: center;
-        width: 100%;
+    * {
+        padding: 0 !important;
+        margin: 0 !important;
     }
 
-    #board, #console {
-        width: 90vw;
-        height: auto;
-        aspect-ratio: 1/1;
-        margin: 10px 0; /* Add spacing between the board and console */
+    body {
+        width: 100vw !important;
+        height: 100vh !important;
+        overflow: hidden;
+    }
+
+    #game {
+        width: 80%;
+        margin: 20px;
+        /* border:2px solid rgb(0, 80, 0); */
+        display: flex;
+        flex-direction: column;
+        display: flex;
+        justify-content: space-between !important;
+        height: 85vh;
+
     }
 
     #board {
-        height: 90vw;
-        flex-grow: ;
+        display: flex;
+        flex-grow: 1;
+        flex-direction: column;
+    }
+
+    .row {
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: center;
+
     }
 
     .tile {
-        font-size: calc(10vw / 3); /* Scale font size for tiles dynamically */
-        border: 3px solid white; /* Ensure tiles remain visible */
+        width: 25vw;
+        height: 25vw;
     }
 
-
-}
+    #console {
+        flex-grow: 5;
+        line-height: 2;
+        max-height: 50vh !important;
+    }
+} /* End of media query for small screens/mobile devices */
