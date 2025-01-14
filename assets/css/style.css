@@ -51,12 +51,19 @@ body {
     height: 10vw;
     padding: 10px;
     margin: 10px;
+    font-size: 80px;
+    color: rgb(0, 255, 0);
 
     /* Move inner text to centre of tile */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
+
+    /* Prevent user from selecting tile */
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
 }
 
 #console {
@@ -76,6 +83,7 @@ body {
 
 #console div {
     padding: 10px !important;
+    font-size: large;
 }
 
 @media (max-width: 1000px) {
