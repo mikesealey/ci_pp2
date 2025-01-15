@@ -123,7 +123,7 @@ function checkWinStatus(tiles, player) {
             winStatus = true
         }
     })
-
+    localStorageScore()
     winStatus ?  $("#console").append(`<div>${player.name} wins!</div>`) : ""
 
     return winStatus
@@ -274,7 +274,7 @@ function generateGrid(size) {
             row.append(tile);
         }
 
-        board.append(row);
+        board.prepend(row);
     }
 
 
