@@ -124,9 +124,6 @@ function checkWinStatus(tiles, player) {
         }
     })
 
-    $("#MikeScore").text(player.score)
-    $("#ComputerScore").text(computer.score)
-
     winStatus ?  $("#console").append(`<div>${player.name} wins!</div>`) : ""
 
     return winStatus
