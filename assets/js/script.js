@@ -1,5 +1,5 @@
 const player = {
-    name: "MikeTest",
+    name: "MikeTest2",
     symbol: "X",
     score: 0
 }
@@ -31,6 +31,7 @@ function selectTile(tile, player) {
         tile.innerText = player.symbol
         $("#console").append(`<div>${player.name} selected ${tile.id}</div>`)
         player.score += 1
+        localStorageScore()
         return true
     } else {
         $("#console").append(`<div>Invalid tile selection - please try again.</div>`)
@@ -282,8 +283,39 @@ function generateGrid(size) {
 
 }
 
+/**
+ * 
+ */
+function localStorageScore(){
+    // Get score from local storage (if exists)
+    // Or take an empty object
+    let storedScore = {}
+    try {
+        const storedData = localStorage.getItem("topScore");
+        if (storedData) {
+            storedScore = JSON.parse(storedData);
+        }
+    } catch (e) {
+        console.error("Error reading from localStorage:", e);
+    }
+    
+    // Check current score against the scored score (or 0 - no stored-score will exist on the first play)
+    if (player.score > (storedScore.score || 0)) {
+        // Update localStorage with the new top score
+        localStorage.setItem("topScore", JSON.stringify(player));
+        storedScore = newTopScore;
+    }
+    
+    $("#current-score").text(player.score)
+    $("#top-score").text(JSON.stringify(storedScore.score))
+    $("#top-player").text(JSON.stringify(storedScore.name))
+    
+}
+
+
 $(document).ready(function () {
-    generateGrid(3)
+    generateGrid(3) // currently only works with 3 - more work to do later beyond MVP
+    localStorageScore()
     welcome()
     
 });
