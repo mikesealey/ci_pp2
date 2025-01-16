@@ -251,9 +251,28 @@ function resetGame(reason, winner) {
  * listens out for a click on the game board, which invokes playGame
  */
 function welcome() {
-    $("#console").append("<div>To get started, click a tile</div>")
+    const commands = [
+        "<div>Are you ready to go toe-to-toe in the battle of Xs and Os?</div>",
+        "<div>Connect 3 Xs, horizontall, vertically, or diagonally, to beat the computer and claim the win.</div>",
+        "<div>Each successive move you make will increase your score, but losing a single round will mean you have to start again, and your score will be reset to 0!</div>",
+        "<div><b><em>Can you beat the top score?</em></b></div>",
+        "<div>To get started, click a tile</div>"
+    ]
+
+    commands.forEach((command, i) => {
+        setTimeout(()=> {
+            $("#console").append(command)
+            if (i === commands.length -1) { // If this is the last command, enable clicking to reset/start the game
+                console.log("here")
+                $(".tile").on("click", resetGame())
+            }
+        }, 1500 * i
+        )
+    })
     
-    $(".tile").on("click", playGame())
+
+    
+    
 }
 
 /**
@@ -274,7 +293,10 @@ function generateGrid(size) {
             row.append(tile);
         }
 
-        board.prepend(row);
+        board.append(row);
+        $("#a1").text("Tic")
+        $("#b2").text("Tac")
+        $("#c3").text("Toe")
     }
 
 
