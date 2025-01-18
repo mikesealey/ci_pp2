@@ -245,6 +245,11 @@ function resetGame(reason, winner) {
     });
 }
 
+function submitName(name) {
+    console.log(name)
+    player.name = name
+}
+
 /**
  * Takes no arguments/parameters
  * Greets the user, and invites them to play a match
@@ -256,7 +261,14 @@ function welcome() {
         "<div>Connect 3 Xs, horizontall, vertically, or diagonally, to beat the computer and claim the win.</div>",
         "<div>Each successive move you make will increase your score, but losing a single round will mean you have to start again, and your score will be reset to 0!</div>",
         "<div><b><em>Can you beat the top score?</em></b></div>",
-        "<div>To get started, click a tile</div>"
+        // multi-line command
+        `
+        <form onsubmit="return false;">
+            <label for="name">Enter your name:</label>
+            <input type="text" id="name" name="name" required>
+            <button type="submit">Submit</button>
+        </form>
+        `
     ]
 
     commands.forEach((command, i) => {
@@ -306,6 +318,7 @@ function generateGrid(size) {
  * 
  */
 function localStorageScore(){
+    console.log(player.name)
     // Get score from local storage (if exists)
     // Or take an empty object
     let storedScore = {}
@@ -322,7 +335,7 @@ function localStorageScore(){
     if (player.score > (storedScore.score || 0)) {
         // Update localStorage with the new top score
         localStorage.setItem("topScore", JSON.stringify(player));
-        storedScore = newTopScore;
+        storedScore = player.score
     }
     
     $("#current-score").text(player.score)
@@ -333,10 +346,24 @@ function localStorageScore(){
 
 
 $(document).ready(function () {
+    // Reset top score for testing
+    // localStorage.setItem("topScore", JSON.stringify({
+    //     name: "MikeTest2",
+    //     symbol: "X",
+    //     score: 0
+    // }))
+    
+
     generateGrid(3) // currently only works with 3 - more work to do later beyond MVP
     localStorageScore()
     welcome()
     
+    $("#board").on("submit", function(event) {
+        console.log("HERE")
+        event.preventDefault()
+        player.name = $("#name").val()
+        console.log(player.name)
+    });
 });
 
 module.exports = { selectTile, computerSelectTile, checkWinStatus, checkDrawStatus }
