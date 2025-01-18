@@ -61,6 +61,12 @@ _UncooperativeGPT_. When discussing this with a friend he suggested that _Prompt
 
 The whole game revolves around clicking on "Tiles" that are essentially just pieces of text. Through testing itt became apparent that it was very easy on desktop to accidentally select the text. This can be prevented with some simple CSS that I found [here](https://www.w3schools.com/howto/howto_css_disable_text_selection.asp) 
 
+As part of the welcome, I wanted messages to appear in the console, slightly delayed. I hadn't realised there were more arguments allowed in the .forEach loop, but [this code](https://travishorn.com/delaying-foreach-iterations-2ebd4b29ad30) makes greate use of the index-parameter to do roughly same as me - loop over the array, logging out each element a specified time after the previous element.
+
+Initially, I had hoped that each loop in the function would take a second to run, however the setTimeout() does not work like this. Instead, thanks to the post linked above, I realised that I needed to multiply the timeout by the index in order to have them log out at the desired, steady pace.
+
+
+
 ## Features
 
 ## Lighthouse Reports & Validation
@@ -96,17 +102,8 @@ This site has been deployed to Github Pages. The steps to deploy are as follows:
 ## Future Developments
 Key listener to user 1-9 number keys to select tile
 Local multiplayer
+Global High Scores with GSHeets API
 
 
 # Notes for later -
-
-
-
-
-
-
-welcome function uses a .one function found here: https://api.jquery.com/one/
-
-https://travishorn.com/delaying-foreach-iterations-2ebd4b29ad30 came in super useful
-
 Custom Scrollbar https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_custom_scrollbar
