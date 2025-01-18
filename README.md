@@ -32,9 +32,7 @@ TicTacToe, also known as Noughts and Crosses, or Xs and Os, is a game where user
 
 ## Design Considerations
 ### Creating a wireframe
-* This site must be accessible on desktop and mobile devices such as phones or tablets. Various sources forecast the mobile gaming industry to generate around $100-Billion* in 2025, so cross-device design from the start has been essential.
-
-\* [Source1](https://venturebeat.com/games/mobile-gaming-is-expected-to-generate-98-7-billion-in-revenue-globally-xsolla/#:~:text=Mobile%20gaming%20is%20expected%20to%20generate%20%2498.7%20billion%20in%20revenue%20globally%20%7C%20Xsolla,-Dean%20Takahashi%40deantak&text=Xsolla%20has%20a%20new%20State%20of%20Play%20report%20for%20Autumn%202024.&text=Image%20Credit%3A%20Xsolla-,Mobile%20gaming%20is%20expected%20to%20generate%20%2498.7%20billion%20in%20revenue,the%20market%20at%20%2465%20billion.) [Source2](https://www.statista.com/outlook/amo/media/games/mobile-games/worldwide?currency=usd) [Source3](https://www.verdict.co.uk/in-data-mobile-gaming-will-generate-195bn-in-revenue-by-2030/?cf-view)
+* This site must be accessible on desktop and mobile devices such as phones or tablets. Various sources forecast the mobile gaming industry to generate around $100-Billion* in 2025, so cross-device design from the start has been essential. [Source1](https://venturebeat.com/games/mobile-gaming-is-expected-to-generate-98-7-billion-in-revenue-globally-xsolla/#:~:text=Mobile%20gaming%20is%20expected%20to%20generate%20%2498.7%20billion%20in%20revenue%20globally%20%7C%20Xsolla,-Dean%20Takahashi%40deantak&text=Xsolla%20has%20a%20new%20State%20of%20Play%20report%20for%20Autumn%202024.&text=Image%20Credit%3A%20Xsolla-,Mobile%20gaming%20is%20expected%20to%20generate%20%2498.7%20billion%20in%20revenue,the%20market%20at%20%2465%20billion.) [Source2](https://www.statista.com/outlook/amo/media/games/mobile-games/worldwide?currency=usd) [Source3](https://www.verdict.co.uk/in-data-mobile-gaming-will-generate-195bn-in-revenue-by-2030/?cf-view)
 
 * Perhaps in contrast the the previous statement of modernity, I opted to go with a decidedly retro-feel, aiming to imitate very early personal computers, such as a [TRS-80 Model 4](https://www.classic-computers.org.nz/blog/2013-04-06-replacing-model4-screen.htm)
  with their green-monochrome colourscheme. 
@@ -44,13 +42,24 @@ TicTacToe, also known as Noughts and Crosses, or Xs and Os, is a game where user
 * Using Balsamiq, I mocked up some wireframes showing a fairly simple, static design - the branding comes in the form of a Logo or Title of sorts, stretched accross the grid of tiles. Any information or instructions are conveyed to the user via the "console" or terminal, in keeping with the retro, pre-GUI operating system style.
 ![alt text](image-1.png)
 
-
-
-
-
 ### Once building was underway
 
 ## Code Sources
+A colleague of mine reccomended Jest's parameterised testing - simply pass an array of possible arguments to a single test, and it will test each one accordingly. This [blog-post](https://blog.codeleak.pl/2021/12/parameterized-tests-with-jest.html) was a fantastic stepping-stone in getting started.
+
+I did try to ask ChatGPT to generate some test-values for me. This felt like a perfect use for generative AI - I explained the task very clearly, hoping simply that it would return all possible combinations of Xs and Os where a draw would be possible
+
+![ChatGPT prompt1](image-2.png)
+
+However ChatGPT would do everything possible to weasle out of actually giving me the list.
+
+![alt text](image-3.png)
+![alt text](image-4.png)
+![alt text](image-5.png)
+
+_UncooperativeGPT_. When discussing this with a friend he suggested that _Prompt Engineering_ was simply fiding the right combination of "pretty" and "please". 
+
+The whole game revolves around clicking on "Tiles" that are essentially just pieces of text. Through testing itt became apparent that it was very easy on desktop to accidentally select the text. This can be prevented with some simple CSS that I found [here](https://www.w3schools.com/howto/howto_css_disable_text_selection.asp) 
 
 ## Features
 
@@ -91,14 +100,12 @@ Local multiplayer
 
 # Notes for later -
 
-Jest Parameterised tests are super cool - pass it an array of options and it will test all of them. My function takes more than one parameter, so they must be passed in as an arrays themselves.
 
-Decided to try to be lazy and get ChatGPT to generate the parameters for some of the tests
-![alt text](image.png)
 
-prevent text selection when clicking tiles https://www.w3schools.com/howto/howto_css_disable_text_selection.asp
 
-wewlcome function uses a .one function found here: https://api.jquery.com/one/
+
+
+welcome function uses a .one function found here: https://api.jquery.com/one/
 
 https://travishorn.com/delaying-foreach-iterations-2ebd4b29ad30 came in super useful
 
