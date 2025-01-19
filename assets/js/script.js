@@ -31,7 +31,7 @@ function selectTile(tile, player) {
         tile.innerText = player.symbol
         $("#console").append(`<div>${player.name} selected ${tile.id}</div>`)
         player.score += 1
-        localStorageScore()
+        setAndFetchTopScore()
         return true
     } else {
         $("#console").append(`<div>Invalid tile selection - please try again.</div>`)
@@ -123,7 +123,7 @@ function checkWinStatus(tiles, player) {
             winStatus = true
         }
     })
-    localStorageScore()
+    setAndFetchTopScore()
     winStatus ?  $("#console").append(`<div>${player.name} wins!</div>`) : ""
 
     return winStatus
@@ -165,8 +165,6 @@ function checkDrawStatus(tiles){
     } else {
         return false
     }
-
-
 }
 
 /**
@@ -316,14 +314,14 @@ function generateGrid(size) {
         $("#b2").text("Tac")
         $("#c3").text("Toe")
     }
-
-
 }
 
 /**
+ * Invoked on screen load, and at each turn (player and computer)
+ * On screen load, checks if a score exists in local storage
  * 
  */
-function localStorageScore(){
+function setAndFetchTopScore(){
     console.log(player.name)
     // Get score from local storage (if exists)
     // Or take an empty object
@@ -354,14 +352,14 @@ function localStorageScore(){
 $(document).ready(function () {
     // Reset top score for testing
     // localStorage.setItem("topScore", JSON.stringify({
-    //     name: "MikeTest2",
+    //     name: "Player1",
     //     symbol: "X",
     //     score: 0
     // }))
     
 
     generateGrid(3) // currently only works with 3 - more work to do later beyond MVP
-    localStorageScore()
+    setAndFetchTopScore()
     welcome()
     
     
