@@ -268,12 +268,10 @@ function welcome() {
         setTimeout(()=> {
             $("#console").append(command)
             if (i === commands.length -1) { // If this is the last command, enable clicking to reset/start the game
-                console.log("here")
                 $("form").on("submit", function(event) { // Event Listener can only be added after form is appended to "console"
-                    console.log("HERE");
                     event.preventDefault();
                     player.name = $("#name").val();
-                    console.log(player.name);
+                    $("#console").append(`<div>Welcome, ${player.name}, click a tile to get started!</div>`)
                 });
                 $(".tile").on("click", resetGame())
             }
