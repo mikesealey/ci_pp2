@@ -1,5 +1,5 @@
 const player = {
-    name: "MikeTest2",
+    name: "Player1",
     symbol: "X",
     score: 0
 }
@@ -276,6 +276,12 @@ function welcome() {
             $("#console").append(command)
             if (i === commands.length -1) { // If this is the last command, enable clicking to reset/start the game
                 console.log("here")
+                $("form").on("submit", function(event) { // Event Listener can only be added after form is appended to "console"
+                    console.log("HERE");
+                    event.preventDefault();
+                    player.name = $("#name").val();
+                    console.log(player.name);
+                });
                 $(".tile").on("click", resetGame())
             }
         }, 1500 * i
@@ -358,12 +364,7 @@ $(document).ready(function () {
     localStorageScore()
     welcome()
     
-    $("#board").on("submit", function(event) {
-        console.log("HERE")
-        event.preventDefault()
-        player.name = $("#name").val()
-        console.log(player.name)
-    });
+    
 });
 
 module.exports = { selectTile, computerSelectTile, checkWinStatus, checkDrawStatus }
