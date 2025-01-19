@@ -243,11 +243,6 @@ function resetGame(reason, winner) {
     });
 }
 
-function submitName(name) {
-    console.log(name)
-    player.name = name
-}
-
 /**
  * Takes no arguments/parameters
  * Greets the user, and invites them to play a match
