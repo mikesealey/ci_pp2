@@ -52,7 +52,7 @@ function computerSelectTile(){
         return
     }
     $("#console").append(`<div>${computer.name} is thinking</div>`)
-    // setTimeout to random time betweet 1 and 5 seconds to give the ilusion of thinking, then choose a tile
+    // setTimeout to random time betweet 1 and 3 seconds to give the ilusion of thinking, then choose a tile
     setTimeout(() => {
         let possibleTiles = $(".tile").filter(function() {
             return $(this).text() === '?';
@@ -64,7 +64,7 @@ function computerSelectTile(){
 
             if (checkWinStatus($(".tile"), computer)) { // If the computer wins
                 $("#console").append(`<div>${computer.name} has won the game!</div>`);
-                $("#console").append(`<div>Click a tile to reset the board and play again.</div>`);
+                $("#console").append(`<div>Double-click a tile to reset the board and play again.</div>`);
                 $(".tile").on("click", () => {
                     resetGame("loss", computer);
                 });
@@ -77,7 +77,7 @@ function computerSelectTile(){
                 $("#console").append(`<div>${player.name}, it's your turn!</div>`);
             }
         }
-    }, Math.ceil(Math.random() * 500) // should be 5000, changed for testing purposes
+    }, Math.ceil(Math.random() * 3000)
     )
     
 }
@@ -181,7 +181,7 @@ function playGame() {
 
                 if (checkWinStatus($(".tile"), currentTurn)) {
                     $("#console").append(`<div>${player.name} has won the game!</div>`)
-                    $("#console").append(`<div>Click a tile to reset the board and play again`)
+                    $("#console").append(`<div>Double-click a tile to reset the board and play again`)
                     // And use resetGame to play another
                     $(".tile").on("click", () => {
                         resetGame("win", player)
@@ -201,11 +201,6 @@ function playGame() {
             }
         }
     });
-
-    
-     
-    
-    
 }
 
 /**
@@ -271,7 +266,7 @@ function welcome() {
                 $("form").on("submit", function(event) { // Event Listener can only be added after form is appended to "console"
                     event.preventDefault();
                     player.name = $("#name").val();
-                    $("#console").append(`<div>Welcome, ${player.name}, click a tile to get started!</div>`)
+                    $("#console").append(`<div>Welcome, ${player.name}, double-click a tile to get started!</div>`)
                 });
                 $(".tile").on("click", resetGame())
             }
