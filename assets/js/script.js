@@ -336,8 +336,8 @@ function setAndFetchTopScore(){
     }
     
     $("#current-score").text(player.score)
-    $("#top-score").text(JSON.stringify(storedScore.score))
-    $("#top-player").text(JSON.stringify(storedScore.name))
+    $("#top-score").text(storedScore.score)
+    $("#top-player").text(storedScore.name)
     
 }
 
