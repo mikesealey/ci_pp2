@@ -336,7 +336,6 @@ function generateGrid(size) {
  *
  */
 function setAndFetchTopScore() {
-  console.log(player.name);
   // Get score from local storage (if exists)
   // Or take an empty object
   let storedScore = {};
