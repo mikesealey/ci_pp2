@@ -1,6 +1,6 @@
 * {
   font-family: monospace;
-  color: rgb(128, 255, 128);
+  color: rgb(180, 255, 180);
 }
 
 body {
@@ -53,7 +53,7 @@ body {
   padding: 10px;
   margin: 10px;
   font-size: 80px;
-  color: rgb(0, 255, 0);
+  color: rgb(180, 255, 180);
 
   /* Move inner text to centre of tile */
   display: flex;
