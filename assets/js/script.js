@@ -291,12 +291,15 @@ function welcome() {
         $("form").on("submit", function (event) {
           // Event Listener can only be added after form is appended to "console"
           event.preventDefault();
-          player.name = $("#name").val();
-          $("#console").append(
-            `<div>Welcome, <span class="player-name">${player.name}</span>, double-click a tile to get started!</div>`
-          );
+          // If player.name is the default, set the player's name and allow them to start the game
+          if (player.name === "Player1") {
+              player.name = $("#name").val();
+              $("#console").append(
+                `<div>Welcome, <span class="player-name">${player.name}</span>, double-click a tile to get started!</div>`
+              );
+              $(".tile").on("click", resetGame());
+          }
         });
-        $(".tile").on("click", resetGame());
       }
     }, 1500 * i);
   });
@@ -333,7 +336,6 @@ function generateGrid(size) {
  *
  */
 function setAndFetchTopScore() {
-    console.log("setAndFetchTopScore")
   console.log(player.name);
   // Get score from local storage (if exists)
   // Or take an empty object
