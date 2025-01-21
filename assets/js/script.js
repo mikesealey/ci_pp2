@@ -29,7 +29,12 @@ function selectTile(tile, player) {
 
   if (tile.innerText === "?") {
     tile.innerText = player.symbol;
-    $("#console").append(`<div>${player.name} selected ${tile.id}</div>`);
+    if (player === computer) {
+        $("#console").append(`<div><span class="computer-name">${player.name}</span> selected ${tile.id}</div>`)
+    } else {
+        $("#console").append(`<div><span class="player-name">${player.name}</span> selected ${tile.id}</div>`)
+    }
+    
     player.score += 1;
     setAndFetchTopScore();
     return true;
@@ -55,7 +60,7 @@ function computerSelectTile() {
     // Check if it's a draw, if it is don't run any further
     return;
   }
-  $("#console").append(`<div>${computer.name} is thinking</div>`);
+  $("#console").append(`<div><span class="computer-name">${computer.name}</span> is thinking</div>`);
   // setTimeout to random time betweet 1 and 3 seconds to give the ilusion of thinking, then choose a tile
   setTimeout(() => {
     let possibleTiles = $(".tile").filter(function () {
@@ -69,7 +74,9 @@ function computerSelectTile() {
 
       if (checkWinStatus($(".tile"), computer)) {
         // If the computer wins
-        $("#console").append(`<div>${computer.name} has won the game!</div>`);
+        $("#console").append(`<div><span class="computer-name">${computer.name}</span> has won the game!</div>`);
+        player.score = 0
+        setAndFetchTopScore()
         $("#console").append(
           `<div>Double-click a tile to reset the board and play again.</div>`
         );
@@ -82,7 +89,7 @@ function computerSelectTile() {
 
       if (!winStatus) {
         currentTurn = player; // Switch turn back to the player
-        $("#console").append(`<div>${player.name}, it's your turn!</div>`);
+        $("#console").append(`<div><span class="player-name">${player.name}</span>, it's your turn!</div>`);
       }
     }
   }, Math.ceil(Math.random() * 3000));
@@ -134,7 +141,7 @@ function checkWinStatus(tiles, player) {
     }
   });
   setAndFetchTopScore();
-  winStatus ? $("#console").append(`<div>${player.name} wins!</div>`) : "";
+  winStatus ? $("#console").append(`<div><span class="player-name">${player.name}</span> wins!</div>`) : "";
 
   return winStatus;
 }
@@ -189,7 +196,7 @@ function playGame() {
       const isValidSelection = selectTile(this, player);
       if (isValidSelection) {
         if (checkWinStatus($(".tile"), currentTurn)) {
-          $("#console").append(`<div>${player.name} has won the game!</div>`);
+          $("#console").append(`<div><span class="player-name">${player.name}</span> has won the game!</div>`);
           $("#console").append(
             `<div>Double-click a tile to reset the board and play again`
           );
@@ -233,12 +240,12 @@ function resetGame(reason, winner) {
     }
   } else if (reason === "draw") {
     $("#console").append(
-      `<div>New game! ${player.name}, it's your turn!</div>`
+      `<div>New game! <span class="player-name">${player.name}</span>, it's your turn!</div>`
     );
   } else if (reason === "loss") {
     player.score = 0; // Reset the player's score
     $("#console").append(
-      `<div>New game! ${player.name}, it's your turn!</div>`
+      `<div>New game! <span class="player-name">${player.name}</span>, it's your turn!</div>`
     );
   }
 
@@ -286,7 +293,7 @@ function welcome() {
           event.preventDefault();
           player.name = $("#name").val();
           $("#console").append(
-            `<div>Welcome, ${player.name}, double-click a tile to get started!</div>`
+            `<div>Welcome, <span class="player-name">${player.name}</span>, double-click a tile to get started!</div>`
           );
         });
         $(".tile").on("click", resetGame());
@@ -326,6 +333,7 @@ function generateGrid(size) {
  *
  */
 function setAndFetchTopScore() {
+    console.log("setAndFetchTopScore")
   console.log(player.name);
   // Get score from local storage (if exists)
   // Or take an empty object
