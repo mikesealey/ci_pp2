@@ -320,7 +320,7 @@ function generateGrid(size) {
 
     for (let j = 1; j <= size; j++) {
       const tileId = `${rowId}${j}`;
-      const tile = $(`<div id="${tileId}" class="tile" aria-label="${tileId}">?</div>`);
+      const tile = $(`<div id="${tileId}" class="tile" aria-label="${tileId}" tabindex="0">?</div>`);
       row.append(tile);
     }
 
