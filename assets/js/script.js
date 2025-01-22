@@ -308,6 +308,7 @@ function welcome() {
 
 /**
  * Takes a number, and generates a square grid of tiles based on that number
+ * Currently only works with a grid-size of 3, but allows for expansions at a later date.
  * @param {number} gridSize
  */
 function generateGrid(size) {
@@ -369,7 +370,7 @@ $(document).ready(function () {
   //     score: 0
   // }))
 
-  generateGrid(3); // currently only works with 3 - more work to do later beyond MVP
+  generateGrid(3);
   setAndFetchTopScore();
   welcome();
 });
