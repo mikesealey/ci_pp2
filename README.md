@@ -81,8 +81,25 @@ Switching to hand-typed HTML with no DOM manipulation immediately remedies this 
 
 
 ### Accessibility
+Though the initial lighthouse tests returned Accessibility at 100, it occured to me to add a note to anyone using a screen reader about how to identify tiles as a grid reference, similar to a chessboard. I also added in the aria label and tab index to each div. 
+```JS
+<div id="${tileId}" class="tile" aria-label="${tileId}" tabindex="0">?</div>
+```
+![alt text](image-11.png)
+
+I also ran the project through WAVE (Web Accessibility Evaluation Tool) multiple times to find, correct, and verify the correct levels of contrast are used.
+
+![alt text](image-12.png)
+
+The "Alert" shown in the image is because no page regions have been used. The elements in question are much more applicable to blogs or news websites where "navigation", "main" or "aside" would make sense to use. These elements are discussed in the [W3C Web Accessibility Initiative](https://www.w3.org/WAI/tutorials/page-structure/regions/)
 
 ### Code Validation
+I've passed my HTML into the validator at [w3.org](https://validator.w3.org/nu/?doc=https%3A%2F%2Fmikesealey.github.io%2Fci_pp2) and recieved no warnings or errors.
+
+![alt text](image-13.png)
+
+
+
 
 ## Testing
 ### Testing User Stories
