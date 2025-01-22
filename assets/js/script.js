@@ -273,6 +273,7 @@ function welcome() {
     "<div>Connect 3 Xs, horizontall, vertically, or diagonally, to beat the computer and claim the win.</div>",
     "<div>Each successive move you make will increase your score, but losing a single round will mean you have to start again, and your score will be reset to 0!</div>",
     "<div><b><em>Can you beat the top score?</em></b></div>",
+    "<div>For anyone using a screen reader to play, each tile is given a grid reference where the letters denote rows, and tiles are numbered from left to right. For example, tile c2 is the third row from the top, second from the left.</div>",
     // multi-line command
     `
         <form onsubmit="return false;">
@@ -319,7 +320,7 @@ function generateGrid(size) {
 
     for (let j = 1; j <= size; j++) {
       const tileId = `${rowId}${j}`;
-      const tile = $(`<div id="${tileId}" class="tile">?</div>`);
+      const tile = $(`<div id="${tileId}" class="tile" aria-label="${tileId}">?</div>`);
       row.append(tile);
     }
 
