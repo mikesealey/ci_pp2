@@ -71,6 +71,14 @@ Initially, I had hoped that each loop in the function would take a second to run
 
 ## Lighthouse Reports & Validation
 ### Performance
+My Code Institute assigned Mentor suggested that I should experiment with using JS to manipulate the DOM more, so I opted to generate the 3x3 grid of tiles programatically, instead of with pre-written HTML. One advantage of that ties in with an additional feature I hope to implement in the future which would let users choose the size of the grid that they play on. The downside to this, however, is that the "Cumulative Layout Shift" stat in Performance takes a huge hit, dropping the overall performace score to 84.
+
+![alt text](image-10.png)
+
+Switching to hand-typed HTML with no DOM manipulation immediately remedies this issue and brings the Performace score up to 99, with a Cumulative Layout Shift of 0.011
+
+![alt text](image-9.png)
+
 
 ### Accessibility
 
