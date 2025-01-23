@@ -23,7 +23,7 @@ let currentTurn = player;
  * @param {object} player
  * @returns
  */
-function selectTile(tile, player) {
+export function selectTile(tile, player) {
   console.log(tile);
   if (winStatus) {
     // If someone has already won, don't run
@@ -60,7 +60,7 @@ function selectTile(tile, player) {
  * Runs the computer's turn
  * Finds all available tiles and selects one as it's own
  */
-function computerSelectTile() {
+export function computerSelectTile() {
   if (winStatus) {
     // If someone has already won, don't run
     return;
@@ -117,7 +117,7 @@ function computerSelectTile() {
  * @param {object} player
  * @returns
  */
-function checkWinStatus(tiles, player) {
+export function checkWinStatus(tiles, player) {
   if (winStatus) {
     // If someone has already won, don't run
     return;
@@ -174,7 +174,7 @@ function checkWinStatus(tiles, player) {
  * @param {object} tiles
  * @returns
  */
-function checkDrawStatus(tiles) {
+export function checkDrawStatus(tiles) {
   let computerTiles = [];
   let playerTiles = [];
   let remainingTiles = [];
@@ -210,7 +210,7 @@ function checkDrawStatus(tiles) {
  * returns nothing as a function
  * switches betwween player and computer taking turns to select tiles
  */
-function playGame() {
+export function playGame() {
   $(".tile").on("click", function () {
     if (currentTurn === player && !winStatus && !drawStatus) {
       const isValidSelection = selectTile(this, player);
@@ -250,7 +250,7 @@ function playGame() {
  * draw
  * loss
  */
-function resetGame(reason, winner) {
+export function resetGame(reason, winner) {
   // Reset the grid
   $(".tile").text("?");
   $(".tile").removeClass("red blue");
@@ -290,7 +290,7 @@ function resetGame(reason, winner) {
  * Greets the user, and invites them to play a match
  * listens out for a click on the game board, which invokes playGame
  */
-function welcome() {
+export function welcome() {
   const commands = [
     "<div>Are you ready to go toe-to-toe in the battle of Xs and Os?</div>",
     "<div>Connect 3 Xs, horizontall, vertically, or diagonally, to beat the computer and claim the win.</div>",
@@ -332,7 +332,7 @@ function welcome() {
  * Currently only works with a grid-size of 3, but allows for expansions at a later date.
  * @param {number} gridSize
  */
-function generateGrid(size) {
+export function generateGrid(size) {
   const board = $("#board");
 
   for (let i = 0; i < size; i++) {
@@ -360,7 +360,7 @@ function generateGrid(size) {
  * On screen load, checks if a score exists in local storage
  *
  */
-function setAndFetchTopScore() {
+export function setAndFetchTopScore() {
   // Get score from local storage (if exists)
   // Or take an empty object
   let storedScore = {};
@@ -398,10 +398,3 @@ $(document).ready(function () {
   welcome();
 });
 
-module.exports = {
-  selectTile,
-  computerSelectTile,
-  checkWinStatus,
-  checkDrawStatus,
-  generateGrid,
-};
