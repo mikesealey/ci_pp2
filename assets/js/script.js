@@ -299,7 +299,7 @@ function welcome() {
     "<div>For anyone using a screen reader to play, each tile is given a grid reference where the letters denote rows, and tiles are numbered from left to right. For example, tile c2 is the third row from the top, second from the left.</div>",
     // multi-line command
     `
-        <form onsubmit="return false;">
+        <form id="name-form" onsubmit="return false;">
             <label for="name">Enter your name:</label>
             <input type="text" id="name" name="name" required>
             <button type="submit">Submit</button>
@@ -316,7 +316,7 @@ function welcome() {
           // Event Listener can only be added after form is appended to "console"
           event.preventDefault();
           player.name = $("#name").val();
-          $(this).find("input button").prop("disabled", true)
+          $("#name-form").find("input, button").prop("disabled", true)
           $("#console").append(
             `<div>Welcome, <span class="player-name">${player.name}</span>, double-click a tile to get started!</div>`
           );
