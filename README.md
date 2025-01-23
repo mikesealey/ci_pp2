@@ -123,6 +123,8 @@ This site has been deployed to Github Pages. The steps to deploy are as follows:
 ## Forking this repo
 
 ## Credits
+favicon https://www.pexels.com/photo/red-and-white-tik-tak-toe-game-illustration-220051/
+
 
 ## Future Developments
 Key listener to user 1-9 number keys to select tile
