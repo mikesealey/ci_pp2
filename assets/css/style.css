@@ -67,6 +67,14 @@ body {
   user-select: none; /* Standard syntax */
 }
 
+.blue {
+  color: blue;
+}
+
+.red {
+  color: red;
+}
+
 #scores {
   border-radius: 12px;
   padding: 10px;
