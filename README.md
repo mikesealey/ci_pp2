@@ -40,7 +40,7 @@ TicTacToe, also known as Noughts and Crosses, or Xs and Os, is a game where user
  ![Working TRS-80 Model 4](https://www.classic-computers.org.nz/blog/images/2013-05-06-new-old-model4.jpg)
 
 * Using Balsamiq, I mocked up some wireframes showing a fairly simple, static design - the branding comes in the form of a Logo or Title of sorts, stretched accross the grid of tiles. Any information or instructions are conveyed to the user via the "console" or terminal, in keeping with the retro, pre-GUI operating system style.
-![alt text](image-1.png)
+![alt text](./assets/readme_assets/image-1.png)
 
 ### Once building was underway
 
@@ -49,13 +49,13 @@ A colleague of mine reccomended Jest's parameterised testing - simply pass an ar
 
 I did try to ask ChatGPT to generate some test-values for me. This felt like a perfect use for generative AI - I explained the task very clearly, hoping simply that it would return all possible combinations of Xs and Os where a draw would be possible
 
-![ChatGPT prompt1](image-2.png)
+![ChatGPT prompt1](./assets/readme_assets/image-2.png)
 
 However ChatGPT would do everything possible to weasle out of actually giving me the list.
 
-![alt text](image-3.png)
-![alt text](image-4.png)
-![alt text](image-5.png)
+![alt text](./assets/readme_assets/image-3.png)
+![alt text](./assets/readme_assets/image-4.png)
+![alt text](./assets/readme_assets/image-5.png)
 
 _UncooperativeGPT_. When discussing this with a friend he suggested that _Prompt Engineering_ was simply fiding the right combination of "pretty" and "please". 
 
@@ -73,11 +73,11 @@ Initially, I had hoped that each loop in the function would take a second to run
 ### Performance
 My Code Institute assigned Mentor suggested that I should experiment with using JS to manipulate the DOM more, so I opted to generate the 3x3 grid of tiles programatically, instead of with pre-written HTML. One advantage of that ties in with an additional feature I hope to implement in the future which would let users choose the size of the grid that they play on. The downside to this, however, is that the "Cumulative Layout Shift" stat in Performance takes a huge hit, dropping the overall performace score to 84.
 
-![alt text](image-10.png)
+![alt text](./assets/readme_assets/image-10.png)
 
 Switching to hand-typed HTML with no DOM manipulation immediately remedies this issue and brings the Performace score up to 99, with a Cumulative Layout Shift of 0.011
 
-![alt text](image-9.png)
+![alt text](./assets/readme_assets/image-9.png)
 
 
 ### Accessibility
@@ -85,22 +85,22 @@ Though the initial lighthouse tests returned Accessibility at 100, it occured to
 ```JS
 <div id="${tileId}" class="tile" aria-label="${tileId}" tabindex="0">?</div>
 ```
-![alt text](image-11.png)
+![alt text](./assets/readme_assets/image-11.png)
 
 I also ran the project through WAVE (Web Accessibility Evaluation Tool) multiple times to find, correct, and verify the correct levels of contrast are used.
 
-![alt text](image-12.png)
+![alt text](./assets/readme_assets/image-12.png)
 
 The "Alert" shown in the image is because no page regions have been used. The elements in question are much more applicable to blogs or news websites where "navigation", "main" or "aside" would make sense to use. These elements are discussed in the [W3C Web Accessibility Initiative](https://www.w3.org/WAI/tutorials/page-structure/regions/)
 
 I've also broken away from the initial design idea of an old green screen by adding in red and blue wherever the player or computer's names are mentioned, along with colouring the Xs or Os accordingly. While this does somewhat detract from the original design idea, it offers more contrast for visually impaired or partially sighted players.
 
-![alt text](image-14.png)
+![alt text](./assets/readme_assets/image-14.png)
 
 ### Code Validation
 I've passed my HTML into the validator at [w3.org](https://validator.w3.org/nu/?doc=https%3A%2F%2Fmikesealey.github.io%2Fci_pp2) and recieved no warnings or errors.
 
-![alt text](image-13.png)
+![alt text](./assets/readme_assets/image-13.png)
 
 
 

@@ -2,14 +2,14 @@ const player = {
   name: "Player1",
   symbol: "X",
   score: 0,
-  color: "blue"
+  color: "blue",
 };
 
 const computer = {
   name: "Computer",
   symbol: "O",
   score: 0,
-  color: "red"
+  color: "red",
 };
 
 let winStatus = false;
@@ -24,13 +24,13 @@ let currentTurn = player;
  * @returns
  */
 function selectTile(tile, player) {
-    console.log(tile)
+  console.log(tile);
   if (winStatus) {
     // If someone has already won, don't run
     return;
   }
 
-  tile.classList.add(player.color)
+  tile.classList.add(player.color);
 
   if (tile.innerText === "?") {
     tile.innerText = player.symbol;
@@ -109,7 +109,6 @@ function computerSelectTile() {
       }
     }
   }, Math.ceil(Math.random() * 3000));
-
 }
 /**
  * Invoke witth $(".tile") (all tiles on the board) and currentPlayer
@@ -254,7 +253,7 @@ function playGame() {
 function resetGame(reason, winner) {
   // Reset the grid
   $(".tile").text("?");
-  $(".tile").removeClass("red blue")
+  $(".tile").removeClass("red blue");
 
   if (reason === "win") {
     if (winner === player) {
@@ -316,14 +315,12 @@ function welcome() {
         $("form").on("submit", function (event) {
           // Event Listener can only be added after form is appended to "console"
           event.preventDefault();
-          // If player.name is the default, set the player's name and allow them to start the game
-          if (player.name === "Player1") {
-            player.name = $("#name").val();
-            $("#console").append(
-              `<div>Welcome, <span class="player-name">${player.name}</span>, double-click a tile to get started!</div>`
-            );
-            $(".tile").on("click", resetGame());
-          }
+          player.name = $("#name").val();
+          $(this).find("input button").prop("disabled", true)
+          $("#console").append(
+            `<div>Welcome, <span class="player-name">${player.name}</span>, double-click a tile to get started!</div>`
+          );
+          $(".tile").on("click", resetGame());
         });
       }
     }, 1500 * i);
@@ -406,5 +403,5 @@ module.exports = {
   computerSelectTile,
   checkWinStatus,
   checkDrawStatus,
-  generateGrid
+  generateGrid,
 };
