@@ -93,6 +93,10 @@ I also ran the project through WAVE (Web Accessibility Evaluation Tool) multiple
 
 The "Alert" shown in the image is because no page regions have been used. The elements in question are much more applicable to blogs or news websites where "navigation", "main" or "aside" would make sense to use. These elements are discussed in the [W3C Web Accessibility Initiative](https://www.w3.org/WAI/tutorials/page-structure/regions/)
 
+I've also broken away from the initial design idea of an old green screen by adding in red and blue wherever the player or computer's names are mentioned, along with colouring the Xs or Os accordingly. While this does somewhat detract from the original design idea, it offers more contrast for visually impaired or partially sighted players.
+
+![alt text](image-14.png)
+
 ### Code Validation
 I've passed my HTML into the validator at [w3.org](https://validator.w3.org/nu/?doc=https%3A%2F%2Fmikesealey.github.io%2Fci_pp2) and recieved no warnings or errors.
 
