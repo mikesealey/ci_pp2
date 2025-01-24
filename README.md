@@ -124,6 +124,22 @@ I've passed my HTML into the validator at [w3.org](https://validator.w3.org/nu/?
 
 ## Testing
 ### Testing User Stories
+* I must understand the purpose of the page at load
+  * Instructions populate in the console
+
+* I would like to be able to play TicTacToe against a computer opponent
+  * 
+
+* I must understand the controls
+  * Controls are explained in the console after entering a username
+![alt text](<assets/readme_assets/image copy 8.png>)
+
+* I would like to record my score and see it
+  * Current user's score can be seen as part of the scoreboard. 
+![alt text](<assets/readme_assets/image copy 9.png>)
+
+* I would like to see a top score and to try to beat it
+  * Top score saved in local storage saves the number of points and the player who achieved it. Score and player are both displayed to the user to invoke some competetive rivalry.
 
 ### Additional testing
 
