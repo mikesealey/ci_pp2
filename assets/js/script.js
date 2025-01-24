@@ -294,7 +294,7 @@ export function resetGame(reason, winner) {
 export function welcome() {
   const commands = [
     "<div>Are you ready to go toe-to-toe in the battle of Xs and Os?</div>",
-    "<div>Connect 3 Xs, horizontall, vertically, or diagonally, to beat the computer and claim the win.</div>",
+    "<div>Connect 3 Xs, horizontally, vertically, or diagonally, to beat the computer and claim the win.</div>",
     "<div>Each successive move you make will increase your score, but losing a single round will mean you have to start again, and your score will be reset to 0!</div>",
     "<div><b><em>Can you beat the top score?</em></b></div>",
     "<div>For anyone using a screen reader to play, each tile is given a grid reference where the letters denote rows, and tiles are numbered from left to right. For example, tile c2 is the third row from the top, second from the left.</div>",
