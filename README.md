@@ -140,18 +140,38 @@ This site has been deployed to Github Pages. The steps to deploy are as follows:
   - Once the master branch has been selected, the page will be automatically refreshed with a detailed ribbon display to indicate the successful deployment.
 
 ## Cloning this repo
+You may wish to clone this repo to work on it yourself
+- At the top of the page above the file-list, click the "Code" button
+- Copy the URL `https://github.com/mikesealey/ci_pp1.git`
+- On the command line, navigate to where you want to clone this repository
+- run the following command
+    `git clone https://github.com/mikesealey/ci_pp2.git`
+- `cd` into the folder, and then run `npm i` to install all dependancies
+![alt text](<assets/readme_assets/image copy 6.png>)
 
 ## Forking this repo
+You may also wish to fork this repo to develop it further for your own needs
+- In the top bar, click "Fork"
+- Choose the github account or organisation where you want to fork the repository
+- Github will now create a copy (or _fork_) of the repository in your account.
+
+![alt text](<assets/readme_assets/image copy 7.png>)
 
 ## Credits
-favicon https://www.pexels.com/photo/red-and-white-tik-tak-toe-game-illustration-220051/
+### Images
+Favicon image found on [pexels](https://www.pexels.com/photo/red-and-white-tik-tak-toe-game-illustration-220051/)
+
 
 
 ## Future Developments
-Key listener to user 1-9 number keys to select tile
-Local multiplayer
-Global High Scores with GSHeets API
+### Button it!
+Key listener to user 1-9 number keys on the user's keyboard to select tile using a [keydown](https://developer.mozilla.org/en-US/docs/Web/API/Element/keydown_event) event. This might further the scope accessability for users whose fine motor skills prevent them from accurately using a mouse.
 
+### Face Off
+Local multiplayer would allow users to compete against someone using the same device.
 
-# Notes for later -
-Custom Scrollbar https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_custom_scrollbar
+### Expansions
+Allow users to specify the size of the grid in which they do battle. The generateGrid(n) function is already laid out to make this a reality, though it does venture into uncharted territory with regards to the game's rules and win conditions. For example, if the grid is n-squared, must the user connect a line of length-n? How would win-conditions be checked programatically? How could all posibiities be tested?
+
+### Bragging Rights
+Global high scores using some sort of database, as well as an API to read and write them. Initially, I had my eyes set on Google Sheets, but everyone I spoke to who had experience with the GSHeets API advised against it.
