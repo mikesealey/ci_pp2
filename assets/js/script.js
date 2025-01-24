@@ -34,6 +34,7 @@ export function selectTile(tile, player) {
 
   if (tile.innerText === "?") {
     tile.innerText = player.symbol;
+    console.log("Tile after:", tile.innerText); 
 
     if (player === computer) {
       $("#console").append(
