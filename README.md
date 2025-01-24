@@ -63,9 +63,28 @@ As part of the welcome, I wanted messages to appear in the console, slightly del
 
 Initially, I had hoped that each loop in the function would take a second to run, however the setTimeout() does not work like this. Instead, thanks to the post linked above, I realised that I needed to multiply the timeout by the index in order to have them log out at the desired, steady pace.
 
-
+I discussed storing global top scores in Google Sheets with my mentor, as well as a few other people. The general consensus was that the GSheets API is _less than straightforward_. My mentor instead suggested using Local Storage, which allows me to save a score in the _browser specifically_. [I enjoyed this video](https://www.youtube.com/watch?v=AUOzvFzdIk4) explaining very simply how local storage works, but I was particularly amused by the idea of a web developer named DOM.
 
 ## Features
+* When the user arrives at the page they are greeted by 3 main elements on the page - a scoreboard, a grid of nine tiles, and a console. On load, the grid also displays the name of the game - Tic Tac Toe
+
+![alt text](assets/readme_assets/image-14.png)
+
+* As the user familiarises themself with the page, instructions begin to display on the page in the console These instructions helping them understand how to play, how each round will proceed, and invites the user to enter their name, with a call to action.
+
+![alt text](<assets/readme_assets/image copy 2.png>)
+
+As the game progresses, tiles are marked with the symbols of the player or computer accordingly. The symbol is coloured red or blue in order to help differentiate from an unmarked tile, and the opponent. The name of the player is also marked red or blue
+
+![alt text](<assets/readme_assets/image copy 3.png>)
+
+If the player loses, and the computer wins, the player's score is then reset to zero. The player is then able to resume playing, albeit from a score of zero.
+
+![alt text](<assets/readme_assets/image copy 4.png>)
+
+Each successive move made by the player increment's their current score by one point. The current player's score is checked against the score saved in the browser's local storage. If the `Current Score` is greater than that saved as the `Local Top Score`, the `Local Top Score` will increase in line with the `Current Score`, and the `Top score set by` value will display the current player's name.
+
+![alt text](<assets/readme_assets/image copy 5.png>)
 
 ## Lighthouse Reports & Validation
 ### Performance
