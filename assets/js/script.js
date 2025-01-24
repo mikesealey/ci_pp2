@@ -88,7 +88,9 @@ export function computerSelectTile() {
       if (checkWinStatus($(".tile"), computer)) {
         // If the computer wins
         $("#console").append(
-          `<div><span class="computer-name">${computer.name}</span> has won the game!</div>`
+          `<div><span class="computer-name">${computer.name}</span> has won the game!</div>`,
+          `<div><span class="player-name">${player.name}'s</span> score has been reset to zero!</div>`
+
         );
         player.score = 0;
         setAndFetchTopScore();
@@ -118,7 +120,7 @@ export function computerSelectTile() {
  * @param {object} player
  * @returns
  */
-export function checkWinStatus(tiles, player) {
+export function checkWinStatus(tiles, thisPlayer) {
   if (winStatus) {
     // If someone has already won, don't run
     return;
@@ -130,7 +132,7 @@ export function checkWinStatus(tiles, player) {
 
   // Loop over keys to filter by player
   tileKeys.forEach((tileKey) => {
-    if (tiles[tileKey].innerText === player.symbol) {
+    if (tiles[tileKey].innerText === thisPlayer.symbol) {
       // If the tile belongs to the player, push it's id to the array
       playersTiles.push(tiles[tileKey].id);
     }
@@ -145,7 +147,7 @@ export function checkWinStatus(tiles, player) {
     ["a2", "b2", "c2"], // Middle Column
     ["a3", "b3", "c3"], // Right Column
     ["a1", "b2", "c3"], // Top Left to bottom right diagonal
-    ["a3", "b2", "c1"], // Loft right to bottom left diagonal
+    ["a3", "b2", "c1"], // Top right to bottom left diagonal
   ];
 
   winningPatterns.forEach((pattern) => {
@@ -158,11 +160,20 @@ export function checkWinStatus(tiles, player) {
     }
   });
   setAndFetchTopScore();
-  winStatus
-    ? $("#console").append(
-        `<div><span class="player-name">${player.name}</span> wins!</div>`
-      )
-    : "";
+  if (winStatus && currentTurn === player) {
+    console.log(currentTurn)
+    $("#console").append(
+      `<div><span class="player-name">${player.name}</span> wins!</div>`
+    )
+  }
+  if (winStatus && currentTurn === computer) {
+    console.log(currentTurn)
+    $("#console").append(
+      `<div><span class="computer-name">${computer.name}</span> wins!</div>`
+    )
+  }
+
+  
 
   return winStatus;
 }
@@ -220,6 +231,7 @@ export function playGame() {
           $("#console").append(
             `<div><span class="player-name">${player.name}</span> has won the game!</div>`
           );
+          
           $("#console").append(
             `<div>Double-click a tile to reset the board and play again`
           );
