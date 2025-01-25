@@ -24,17 +24,14 @@ let currentTurn = player;
  * @returns
  */
 export function selectTile(tile, player) {
-  console.log(tile);
   if (winStatus) {
     // If someone has already won, don't run
     return;
   }
 
   tile.classList.add(player.color);
-
   if (tile.innerText === "?") {
     tile.innerText = player.symbol;
-    console.log("Tile after:", tile.innerText); 
 
     if (player === computer) {
       $("#console").append(
@@ -90,7 +87,6 @@ export function computerSelectTile() {
         $("#console").append(
           `<div><span class="computer-name">${computer.name}</span> has won the game!</div>`,
           `<div><span class="player-name">${player.name}'s</span> score has been reset to zero!</div>`
-
         );
         player.score = 0;
         setAndFetchTopScore();
@@ -161,20 +157,15 @@ export function checkWinStatus(tiles, thisPlayer) {
   });
   setAndFetchTopScore();
   if (winStatus && currentTurn === player) {
-    console.log(currentTurn)
     $("#console").append(
       `<div><span class="player-name">${player.name}</span> wins!</div>`
-    )
+    );
   }
   if (winStatus && currentTurn === computer) {
-    console.log(currentTurn)
     $("#console").append(
       `<div><span class="computer-name">${computer.name}</span> wins!</div>`
-    )
+    );
   }
-
-  
-
   return winStatus;
 }
 
@@ -231,7 +222,7 @@ export function playGame() {
           $("#console").append(
             `<div><span class="player-name">${player.name}</span> has won the game!</div>`
           );
-          
+
           $("#console").append(
             `<div>Double-click a tile to reset the board and play again`
           );
@@ -329,7 +320,7 @@ export function welcome() {
           // Event Listener can only be added after form is appended to "console"
           event.preventDefault();
           player.name = $("#name").val();
-          $("#name-form").find("input, button").prop("disabled", true)
+          $("#name-form").find("input, button").prop("disabled", true);
           $("#console").append(
             `<div>Welcome, <span class="player-name">${player.name}</span>, double-click a tile to get started!</div>`
           );
@@ -410,4 +401,3 @@ $(document).ready(function () {
   setAndFetchTopScore();
   welcome();
 });
-
