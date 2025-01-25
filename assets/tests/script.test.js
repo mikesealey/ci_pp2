@@ -87,11 +87,11 @@ describe("Testing resetGame()", () => {
     document.body.innerHTML = '<div id="board"></div>';
     // Invoke
     generateGrid(3);
-    resetGame()
+    resetGame();
     // Assert
     $(".tile").each((index, tile) => {
       // loops to check every tile
-      expect($(tile).text()).toBe("?")
+      expect($(tile).text()).toBe("?");
     });
   });
 
@@ -100,17 +100,17 @@ describe("Testing resetGame()", () => {
     document.body.innerHTML = '<div id="board"></div>';
     // Invoke
     generateGrid(26);
-    resetGame()
+    resetGame();
     // Assert
     $(".tile").each((index, tile) => {
       // loops to check every tile
-      expect($(tile).text()).toBe("?")
+      expect($(tile).text()).toBe("?");
     });
   });
 });
 
-describe("Testing selectTile()", ()=> {
-  test("checks that a player can select a tile", ()=> {
+describe("Testing selectTile()", () => {
+  test("checks that a player can select a tile", () => {
     // mock a DOM locally
     document.body.innerHTML = '<div id="board"></div>';
     // Player object
@@ -121,14 +121,13 @@ describe("Testing selectTile()", ()=> {
       color: "red",
     };
     // Invoke
-    generateGrid(3)
-    resetGame()
+    generateGrid(3);
+    resetGame();
 
-    const tile = document.getElementById("a1")
-    selectTile(tile, testPlayer)
+    const tile = document.getElementById("a1");
+    selectTile(tile, testPlayer);
     // Assert
     // inner text of tile should be equal to player.symbol
-    expect(tile.classList.contains(testPlayer.color)).toBe(true)
-  })
-})
-
+    expect(tile.classList.contains(testPlayer.color)).toBe(true);
+  });
+});
