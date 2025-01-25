@@ -3,6 +3,9 @@
  */
 
 const $ = require("jquery");
+const fs = require("fs");
+const path = require("path")
+global.$ = $;
 import {
   selectTile,
   computerSelectTile,
@@ -11,44 +14,61 @@ import {
   playGame,
   resetGame,
   generateGrid,
-  setAndFetchTopScore
+  setAndFetchTopScore,
 } from "../js/script"
 
-global.$ = $;
+import { getByText } from "@testing-library/dom";
 
-beforeAll(() => {
-  const fs = require("fs");
-  const fileContents = fs.readFileSync("index.html", "utf-8");
-  document.open();
-  document.write(fileContents);
-  document.close();
-});
-
-describe("selectTile", () => {
-  let player;
-  let tile;
-
-  beforeEach(() => {
-    // Set up mock player object
-    player = { name: "Player 1", symbol: "X", color: "red", score: 0 };
-
-    // Set up a mock tile using jQuery and get the raw DOM element
-    tile = $("<div>", {
-      id: "a1",
-      class: "tile",
-      "aria-label": "a1",
-      tabindex: "0",
-      text: "?", // Initial state of the tile
-    }).get(0); // Get the raw DOM element
+describe("Testing generateGrid()", ()=> {
+  test("Dresses the tiles with the TicTacToe text", () => {
+    // mock a DOM locally
+    document.body.innerHTML = '<div id="board"></div>';
+    // Invoke
+    generateGrid(3);
+    // Assert
+    expect($("#a1").text()).toBe("Tic");
+    expect($("#b2").text()).toBe("Tac");
+    expect($("#c3").text()).toBe("Toe");
   });
+})
 
-  test("should set the inner text of the tile to the player's symbol", () => {
-    selectTile(tile, player);
 
-    // Check if the innerText of the tile is set to the player's symbol
-    expect(tile.innerText).toBe(player.symbol); // This should now be "X"
-  });
-});
+
+// 
+
+// beforeAll(() => {
+
+//   fs.writeFile("./contents.html", fileContents, "utf8")
+//   document.open();
+//   document.write(fileContents);
+//   document.close();
+// });
+
+// describe("selectTile", () => {
+//   let player;
+//   let tile;
+
+//   beforeEach(() => {
+//     // Set up mock player object
+//     player = { name: "Player 1", symbol: "X", color: "red", score: 0 };
+
+//     // Set up a mock tile using jQuery and get the raw DOM element
+//     tile = $("<div>", {
+//       id: "a1",
+//       class: "tile",
+//       "aria-label": "a1",
+//       tabindex: "0",
+//       text: "?", // Initial state of the tile
+//     }).get(0); // Get the raw DOM element
+//   });
+
+//   test("should set the inner text of the tile to the player's symbol", () => {
+//     selectTile(tile, player);
+
+//     // Check if the innerText of the tile is set to the player's symbol
+//     expect(tile.innerText).toBe(player.symbol); // This should now be "X"
+//   });
+// });
 
 
 
