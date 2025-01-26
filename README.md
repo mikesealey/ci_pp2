@@ -64,7 +64,7 @@ However ChatGPT would do everything possible to weasle out of actually giving me
 
 _UncooperativeGPT_. When discussing this with a friend he suggested that _Prompt Engineering_ was simply fiding the right combination of "pretty" and "please".
 
-The whole game revolves around clicking on "Tiles" that are essentially just pieces of text. Through testing itt became apparent that it was very easy on desktop to accidentally select the text. This can be prevented with some simple CSS that I found [here](https://www.w3schools.com/howto/howto_css_disable_text_selection.asp)
+The whole game revolves around clicking on "Tiles" that are essentially just pieces of text. Through testing it became apparent that it was very easy on desktop to accidentally select the text. This can be prevented with some simple CSS that I found [here](https://www.w3schools.com/howto/howto_css_disable_text_selection.asp)
 
 As part of the welcome, I wanted messages to appear in the console, slightly delayed. I hadn't realised there were more arguments allowed in the .forEach loop, but [this code](https://travishorn.com/delaying-foreach-iterations-2ebd4b29ad30) makes greate use of the index-parameter to do roughly same as me - loop over the array, logging out each element a specified time after the previous element.
 
@@ -74,17 +74,14 @@ Initially, I had hoped that each loop in the function would take a second to run
 setTimeout( /* thing to add to the queue */, 1500 * i);
 ```
 
-I discussed storing global top scores in Google Sheets with my mentor, as well as a few other people. The general consensus was that the GSheets API is _less than straightforward_. My mentor instead suggested using Local Storage, which allows me to save a score in the _browser specifically_. [I enjoyed this video](https://www.youtube.com/watch?v=AUOzvFzdIk4) explaining very simply how local storage works, but I was particularly amused by the idea of a web developer named DOM.
+I discussed storing global top scores in Google Sheets with my mentor, as well as a few other people. The general consensus was that the GSheets API is _less than straightforward_. My mentor instead suggested using Local Storage, which allows me to save a score in the _browser specifically_. [I enjoyed this video](https://www.youtube.com/watch?v=AUOzvFzdIk4) explaining very simply how local storage works, but I was particularly amused by the idea of the vlogger being a web developer named DOM.
 
 ## Features
 
 - When the user arrives at the page they are greeted by 3 main elements on the page - a scoreboard, a grid of nine tiles, and a console. On load, the grid also displays the name of the game - Tic Tac Toe
-
-![alt text](assets/readme_assets/image-14.png)
-
 - As the user familiarises themself with the page, instructions begin to display on the page in the console These instructions helping them understand how to play, how each round will proceed, and invites the user to enter their name, with a call to action.
 
-![alt text](<assets/readme_assets/image copy 2.png>)
+![alt text](<assets/readme_assets/Screenshot 2025-01-26 at 8.22.06 AM.png>)
 
 As the game progresses, tiles are marked with the symbols of the player or computer accordingly. The symbol is coloured red or blue in order to help differentiate from an unmarked tile, and the opponent. The name of the player is also marked red or blue
 
@@ -137,6 +134,7 @@ I've passed my HTML into the validator at [w3.org](https://validator.w3.org/nu/?
 ![alt text](./assets/readme_assets/image-13.png)
 
 I've passed my `script.test.js` file, and my `script.js` file into [JSHint](https://jshint.com/) to check for errors. Neither file contains any errors, though in both cases it does return warnings that using `const` or `string litterals` is only available with ES6, and will incompatible with older browsers like Internet Explorer. [Read more here](https://www.w3schools.com/js/js_es6.asp#mark_const)
+
 ![alt text](image-1.png)
 ![alt text](image-2.png)
 
@@ -145,6 +143,7 @@ I've passed my `script.test.js` file, and my `script.js` file into [JSHint](http
 My mentor pointed me towards [JSDoc](https://jsdoc.app/about-getting-started), which is a fantastic resource that allows developers to write documentation in the code itself. It lets the developer specify notes on the use-case of the function, but also what arguments that function should expect. This came in particularly useful when importing functions for testing; despite the function and it's associated notes being written in a different file, importing the function to the test-file bring with it the documentation on it reminding me which way around the arguments should be passed, and what types they might be.
 
 There are also options to generate external documentation that fetches all of these guides from above the functions and writes a guide to be published.
+
 ![alt text](<assets/readme_assets/image copy 10.png>)
 
 ## Testing
@@ -155,18 +154,22 @@ There are also options to generate external documentation that fetches all of th
 
   - Instructions populate in the console
 
+  ![alt text](<assets/readme_assets/image copy 2.png>)
+
 - I would like to be able to play TicTacToe against a computer opponent
 
-  -
+  - Once the user has entered their name they are able to play against the computer opponent
 
 - I must understand the controls
 
   - Controls are explained in the console after entering a username
+
     ![alt text](<assets/readme_assets/image copy 8.png>)
 
 - I would like to record my score and see it
 
   - Current user's score can be seen as part of the scoreboard.
+
     ![alt text](<assets/readme_assets/image copy 9.png>)
 
 - I would like to see a top score and to try to beat it
@@ -174,7 +177,44 @@ There are also options to generate external documentation that fetches all of th
 
 ### Additional testing
 
+- I have tried resubmitting the player name part-way through a game - the form is set to disabled as part of the submit function
+- I have tried selecting a tile before the game is ready to play - the event-listener is not yet set, so no tiles can be selected
+- I have tried selecting a tile that already belongs to me - the function checks this an instructs the player to try again
+- I have tried selecting a tile that already belongs to the compuer - the function checks this an instructs the player to try again
+
 ### Functional Testing
+
+| Action                                                                                   | Expected Outcome                                                                                                                   | Pass/Fail |
+| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | --------- |
+| <h4>_Beginning the Game_</h4>                                                            |                                                                                                                                    |           |
+| Clicking the link to the website                                                         | User should arrive at the game                                                                                                     | Pass      |
+| On page load                                                                             | Grid should populate                                                                                                               | Pass      |
+| On page load                                                                             | Grid should display the name of the game according to the wireframe                                                                | Pass      |
+| On page load                                                                             | Console should display instructions                                                                                                | Pass      |
+| On page load                                                                             | Console should invite the user to submit their name                                                                                | Pass      |
+| On user submitting name                                                                  | Console should welcome the player                                                                                                  | Pass      |
+| On user submitting name                                                                  | Player Name form should be disabled                                                                                                | Pass      |
+| On user submitting name                                                                  | Player should be invited to begin playing                                                                                          | Pass      |
+| <h4>_Playing the game_</h4>                                                              |                                                                                                                                    |           |
+| Clicking a valid "?" tile                                                                | User's marker should replace the "?"                                                                                               | pass      |
+| Clicking a valid "?" tile                                                                | User's marker should match user's colour                                                                                           | pass      |
+| Clicking a valid "?" tile                                                                | User's score should increase by 1                                                                                                  | pass      |
+| Clicking a valid "?" tile when the score is already equal to the local top score         | User's score should increase by 1, Local Top Score should match Current Score, Top Score Set By should match current player's name | pass      |
+| Clicking an invalid tile - already belongs to the user                                   | No change to grid - user prompted to try again                                                                                     | pass      |
+| Clicking an invalid tile - already belongs to the computer opponent                      | No change to grid - user prompted to try again                                                                                     | pass      |
+| After clicking a valid tile                                                              | Current turn switches to the computer opponent, and is announced in the console                                                    | pass      |
+| Computer opponent's turn                                                                 | console indicates that the computer opponent is "thinking"                                                                         | pass      |
+| Computer opponent's turn                                                                 | console indicates that the computer opponent has selected a tile within a few seconds                                              | pass      |
+| Computer opponent's turn                                                                 | grid updates with the computer opponent's selected tile showing the appropriate marker                                             | pass      |
+| Computer opponent's turn                                                                 | grid updates with the computer opponent's selected tile showing the appropriate marker in the correct colour                       | pass      |
+| Computer opponent's turn                                                                 | Current turn switches to the human player, and is announced in the console                                                         | pass      |
+| <h4>_Ending the game_</h4>                                                               |                                                                                                                                    |           |
+| When user connects three in a row (horizontally, vertically, or diagonally)              | Register the win in the console                                                                                                    | pass      |
+| When computer opponent connects three in a row (horizontally, vertically, or diagonally) | Register the loss in the console                                                                                                   | pass      |
+| When computer opponent connects three in a row (horizontally, vertically, or diagonally) | Reset player score to 0                                                                                                            | pass      |
+| <h4>_PLay again!_</h4>                                                                   |                                                                                                                                    |           |
+| Resetting the grid                                                                       | Grid should reset to selectable tiles "?"                                                                                          | pass      |
+| Resetting the grid                                                                       | Tiles "?" should all have neutral colours                                                                                          | pass      |
 
 ### Testing DOM manipulation in Jest
 
@@ -245,6 +285,7 @@ You may wish to clone this repo to work on it yourself
 - run the following command
   `git clone https://github.com/mikesealey/ci_pp2.git`
 - `cd` into the folder, and then run `npm i` to install all dependancies
+
   ![alt text](<assets/readme_assets/image copy 6.png>)
 
 ## Forking this repo
@@ -265,6 +306,8 @@ Favicon image found on [pexels](https://www.pexels.com/photo/red-and-white-tik-t
 
 ## Future Developments
 
+There's no such thing as final touches - there's always more that could be done to improve it expand upon a project. Listed below are some additional features that
+
 ### Button it!
 
 Key listener to user 1-9 number keys on the user's keyboard to select tile using a [keydown](https://developer.mozilla.org/en-US/docs/Web/API/Element/keydown_event) event. This might further the scope accessability for users whose fine motor skills prevent them from accurately using a mouse.
@@ -280,3 +323,7 @@ Allow users to specify the size of the grid in which they do battle. The generat
 ### Bragging Rights
 
 Global high scores using some sort of database, as well as an API to read and write them. Initially, I had my eyes set on Google Sheets, but everyone I spoke to who had experience with the GSHeets API advised against it.
+
+### Personalisation
+
+Giving the user the option to specify a colour and symbol to mark their tiles with would certainly give the user a more personalised experience. Some Emojis might also work nicely for this, for example allowing apples vs oranges, or car vs plane.
