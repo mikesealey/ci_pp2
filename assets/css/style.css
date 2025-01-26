@@ -95,6 +95,10 @@ body {
   margin: 0 10px;
 }
 
+.scoreboard-button {
+  padding: 5px !important;
+}
+
 #console {
   background-color: rgb(0, 120, 0);
   color: rgb(0, 255, 0);

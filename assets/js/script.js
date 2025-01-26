@@ -325,6 +325,8 @@ export function welcome() {
             `<div>Welcome, <span class="player-name">${player.name}</span>, double-click a tile to get started!</div>`
           );
           $(".tile").on("click", resetGame());
+          $("#scores-buttons").append("<button class='scoreboard-button'><b>How to Play</b></button>") // Adds a "Show rules" button 
+          $(".scoreboard-button").on("click", showRules); // Allows 'Showw Rules' button to work
         });
       }
     }, 1500 * i);
@@ -389,14 +391,20 @@ export function setAndFetchTopScore() {
   $("#top-player").text(storedScore.name);
 }
 
-$(document).ready(function () {
-  // Reset top score for testing
-  // localStorage.setItem("topScore", JSON.stringify({
-  //     name: "Player1",
-  //     symbol: "X",
-  //     score: 0
-  // }))
+export function showRules(){
+  const howToPlayStatements = [
+    "<div><b>Objective:</b> Mark three tiles in line, either horizontally, vertically, or diagonally</div>",
+    "<div><b>Gameplay:</b>Take it in turns to select a tile</div>",
+    "<div>Each time you select a tile your score will increase</div>",
+    "<div>But losing a single round will revert your score to 0</div>",
+    "<div>Keep playing as long as you can and try to beat the local top score</div>",
+  ]
+  howToPlayStatements.forEach((statement)=> {
+    $("#console").append(statement)
+  })
+}
 
+$(document).ready(function () {
   generateGrid(3);
   setAndFetchTopScore();
   welcome();
