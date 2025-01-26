@@ -6,19 +6,36 @@ TicTacToe, also known as Noughts and Crosses, or Xs and Os, is a game where user
 
 ## Contents
 
-- [About TicTacToe](#TicTacToe-Milestone-Project-2)
-- [User Stories](#user-stories)
-  - [As a user...](#as-a-user)
-- [Design Considerations](#design-considerations)
-  - [Creating a wireframe](#creating-a-wireframe)
-  - [Once building was underway](#once-building-was-underway)
-- [Code Sources](#code-sources)
-- [Features](#features)
-- [Lighthouse Reports & Validation](#lighthouse-reports--validation)
-- [Testing](#testing)
-- [Deployment](#deployment)
-- [Credits](#credits)
-- [Future Developments](#Future-Developments)
+- [TicTacToe Milestone Project 2](#tictactoe-milestone-project-2)
+  - [Contents](#contents)
+  - [User Stories](#user-stories)
+    - [As a user...](#as-a-user)
+  - [Design Considerations](#design-considerations)
+    - [Creating a wireframe](#creating-a-wireframe)
+  - [Code Sources](#code-sources)
+  - [Features](#features)
+  - [Lighthouse Reports & Validation](#lighthouse-reports--validation)
+    - [Performance](#performance)
+    - [Accessibility](#accessibility)
+    - [Code Validation](#code-validation)
+    - [Code Documentation](#code-documentation)
+  - [Testing](#testing)
+    - [Testing User Stories](#testing-user-stories)
+    - [Additional testing](#additional-testing)
+    - [Functional Testing](#functional-testing)
+    - [Testing DOM manipulation in Jest](#testing-dom-manipulation-in-jest)
+    - [Browser Compatibility](#browser-compatibility)
+  - [Deployment](#deployment)
+  - [Cloning this repo](#cloning-this-repo)
+  - [Forking this repo](#forking-this-repo)
+  - [Credits](#credits)
+    - [Images](#images)
+  - [Future Developments](#future-developments)
+    - [Button it!](#button-it)
+    - [Face Off](#face-off)
+    - [Expansions](#expansions)
+    - [Bragging Rights](#bragging-rights)
+    - [Personalisation](#personalisation)
 
 ## User Stories
 
@@ -327,3 +344,6 @@ Global high scores using some sort of database, as well as an API to read and wr
 ### Personalisation
 
 Giving the user the option to specify a colour and symbol to mark their tiles with would certainly give the user a more personalised experience. Some Emojis might also work nicely for this, for example allowing apples vs oranges, or car vs plane.
+
+[Back to the top](#tictactoe-milestone-project-2)
+
