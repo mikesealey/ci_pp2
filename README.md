@@ -150,10 +150,32 @@ I've passed my HTML into the validator at [w3.org](https://validator.w3.org/nu/?
 
 ![alt text](./assets/readme_assets/image-13.png)
 
+I passed my CSS into [w3.org css vaidator](https://jigsaw.w3.org/css-validator/validator) which returns no errors, only two warnings about the lines that prevent a user from accidentally selecting the text of a tile, as they are specific to certain browsers
+```CSS
+  /* Prevent user from selecting tile */
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+  ```
+
+![alt text](<assets/readme_assets/image copy 14.png>)
+
+![alt text](<assets/readme_assets/image copy 15.png>)
+
 I've passed my `script.test.js` file, and my `script.js` file into [JSHint](https://jshint.com/) to check for errors. Neither file contains any errors, though in both cases it does return warnings that using `const` or `string litterals` is only available with ES6, and will incompatible with older browsers like Internet Explorer. [Read more here](https://www.w3schools.com/js/js_es6.asp#mark_const)
 
 ![alt text](image-1.png)
 ![alt text](image-2.png)
+
+I also passed `script.js` into [JS Lint](jslint.com). JS Lint did not throw any errors, but pulled up some different warnings to JS Hint, such as a single line being greater than 80 characters long, or key-value-pairs being _present_ but _not in the expected order_. 
+
+![alt text](<assets/readme_assets/image copy 11.png>)
+
+![alt text](<assets/readme_assets/image copy 12.png>)
+
+JS Lint didn't seem to be able to parse the tests file properly, but only threw warnings, not errors.
+
+![alt text](<assets/readme_assets/image copy 13.png>)
 
 ### Code Documentation
 
@@ -211,6 +233,7 @@ There are also options to generate external documentation that fetches all of th
 | On page load                                                                             | Console should invite the user to submit their name                                                                                | Pass      |
 | On user submitting name                                                                  | Console should welcome the player                                                                                                  | Pass      |
 | On user submitting name                                                                  | Player Name form should be disabled                                                                                                | Pass      |
+| On user submitting empty name field                                                      | Player Name field is required, user prompted, submit function not run.                                                             | Pass      |
 | On user submitting name                                                                  | Player should be invited to begin playing                                                                                          | Pass      |
 | <h4>_Playing the game_</h4>                                                              |                                                                                                                                    |           |
 | Clicking a valid "?" tile                                                                | User's marker should replace the "?"                                                                                               | pass      |
@@ -281,6 +304,18 @@ expect(tile.innerText).toBe(testPlayer.symbol) // Fails in Jest, passes through 
 expect(tile.classList.contains(testPlayer.color)).toBe(true) // Passes
 ```
 
+### Testing on Mobile Devices
+
+When deciding on dimensions of mobile devices for the wireframes to test, I settled on the dimensions of the hardware that I have access to - a Google Pixel 8, and a Lenovo M8 tablet.
+
+Though the screenshot includes the browser features at the top, and cuts a little off the bottom, during normal play the full page is accessable and visible. The screenshot functionality of the Pixel 8 leaves a lot to be desired.
+
+![alt text](<assets/readme_assets/image copy 16.png>)
+
+Lenovo m8 Tablet screenshot functionality behaves much more as expected.
+
+![alt text](<assets/readme_assets/image copy 17.png>)
+
 ### Browser Compatibility
 
 ## Deployment
@@ -346,4 +381,3 @@ Global high scores using some sort of database, as well as an API to read and wr
 Giving the user the option to specify a colour and symbol to mark their tiles with would certainly give the user a more personalised experience. Some Emojis might also work nicely for this, for example allowing apples vs oranges, or car vs plane.
 
 [Back to the top](#tictactoe-milestone-project-2)
-
